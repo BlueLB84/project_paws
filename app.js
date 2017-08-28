@@ -1,36 +1,33 @@
 const STATE = {
     data: null,
     query: {
-        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
-        animal: 'dog',
-        location: 'acton, ma',
-        callback: '?',
-        output: 'basic',
-        format: 'json',
+        api_key: 'DEMO_KEY',
+        // animal: 'dog',
+        // location: 'acton, ma',
+        // callback: '?',
+        // output: 'basic',
+        // format: 'json',
     },
-    petfinder_search_url: 'https://api.petfinder.com/',
-    method: 'pet.find'
+    petfinder_search_url: 'https://api.nasa.gov/planetary/apod?',
+    // method: 'pet.find'
 }
 
 function getDataFromAPI(callback) {
-    // let apiURL = STATE.petfinder_search_url + `${STATE.method}`;
-    // $.getJSON(apiURL, STATE.query, callback).done(function(petApiData) {alert('Data retrieved!')});
-    $.getJSON('https://api.petfinder.com/pet.getRandom?format=jsonp&key=ba13b6abb4f8162d2d70780f5d2a8d35&callback=?')
-    .done(function(petApiData) { alert('Data retrieved!')})
-    .error(function(err) { alert('Error retrieving data!'); 
-  });
+    // let apiURL = STATE.petfinder_search_url + STATE.query.api_key;
+    // $.getJSON('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', callback);
+    $.getJSON('https://api.petfinder.com/pet.find?format=json&key=ba13b6abb4f8162d2d70780f5d2a8d35&location=acton,ma&callback=?', callback);
   };
 
 function displayPetfinderData(data) {
     STATE.data = data;
-    const results = data.pets.map((item, index) => {
-        return renderDataResults(item);
-    })
-    console.log(results);
+    console.log(data);
+    // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
+    // $('.js-results').html(results);
 }
 
-function renderDataResults(result) {
-    return `${result.name}`
+
+function testAPI() {
+    getDataFromAPI(displayPetfinderData);
 }
 
-$(getDataFromAPI);
+$(document).ready(testAPI);
