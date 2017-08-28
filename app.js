@@ -22,7 +22,7 @@ function getDataFromAPI(callback) {
     STATE.method = method;
     let apiURL = STATE.petfinder_search_url + `${STATE.method}`;
     // $.getJSON(apiURL, STATE.query, callback);
-    $.getJSON('http://api.petfinder.com/pet.find?format=json&key=ba13b6abb4f8162d2d70780f5d2a8d35&callback=?')
+    $.getJSON('https://api.petfinder.com/pet.find?format=json&key=ba13b6abb4f8162d2d70780f5d2a8d35&callback=?')
     .done(function(petApiData) { alert('Data retrieved!')})
     .error(function(err) { alert('Error retrieving data!'); 
   });
