@@ -9,11 +9,16 @@ const STATE = {
         sex: null,
         size: null,
         age: null,
-        breed: [null,null],  
+        breed: [null,null] 
+    },
+    queryShelter: {
+        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
+        format: 'json',
+        location: null
     },
     petfinder_search_url: 'https://api.petfinder.com/',
     method: null
-}
+};
  
 function getDataFromAPI(method, callback) {
     const breedParams = joinBreeds();
@@ -21,19 +26,24 @@ function getDataFromAPI(method, callback) {
     $.getJSON(apiURL, STATE.query, callback);
   };
 
+function getShelterDataFromAPI(method, callback) {
+    let apiURL = STATE.petfinder_search_url + method + "?callback=?";
+    $.getJSON(apiURL, STATE.queryShelter, callback);
+};
+
 function joinBreeds() {
 	let breedParams = STATE.query.breed.map(function(item){
         return `breed=${item}`;
     })
 	return breedParams.join('&');
-}
+};
 
 function displayPetfinderData(data) {
     STATE.data = data;
     console.log(STATE.data);
     // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
     // $('.js-results').html(results);
-}
+};
 
 function handlePetFindSubmit(event) {
     $('.js-search-form').on('click','.js-button--dogs',event => {
@@ -50,7 +60,7 @@ function handlePetFindSubmit(event) {
             getDataFromAPI(STATE.method, displayPetfinderData);
         }
     })
-}
+};
 
 function filterPetFindSubmit(event) {
     STATE.method = 'pet.find';
@@ -69,7 +79,7 @@ function filterPetFindSubmit(event) {
     const querySex = $(event.currentTarget).parent().find('#filters__sexAgeSize--sex :selected');
     const querySexVal = querySex.text();
     filterSexOptions(querySexVal);
-}
+};
 
 function filterSizeOptions(size) {
     switch(size) {
@@ -92,7 +102,7 @@ function filterSizeOptions(size) {
         STATE.query.size = null;
         break;
     }
-}
+};
 
 function filterSexOptions(sex) {
     switch(sex) {
@@ -109,7 +119,7 @@ function filterSexOptions(sex) {
         STATE.query.sex = null;
         break;
     }
-}
+};
 
 function handleFindShelterSubmit() {
     $('.js-search-form').on('click','.js-button--shelters', event => {
@@ -122,12 +132,12 @@ function handleFindShelterSubmit() {
             alert('Please enter a location.');
             $('.js-search-location').focus();
         } else {
-            STATE.query.location = locationVal;
+            STATE.queryShelter.location = locationVal;
             queryLocation.val('');
-            // getDataFromAPI(method, displayPetfinderData);
+            getShelterDataFromAPI(method, displayPetfinderData);
         }
     })
-}
+};
 
 function handleRandomDogSubmit() {
     $('.js-search-form').on('click', '.js-button--random', event => {
@@ -137,16 +147,16 @@ function handleRandomDogSubmit() {
         const method = STATE.method;
         // getDataFromAPI(method, displayPetfinderData);
     })
-}
+};
 
 function submitFunctionHandlers() {
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();
-}
+};
 
 function testAPI() {
     submitFunctionHandlers();
-}
+};
 
 $(document).ready(testAPI);
