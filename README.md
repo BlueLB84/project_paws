@@ -3,9 +3,9 @@
 Checkout this project on [GitHub Pages!](https://bluelb84.github.io/project_paws/ "Project Paws")
 
 ## Overview ##
-This is my first capstone project for Thinkful's Flex Web Development Bootcamp.  Project Paws utilizes the [Petfinder API](https://www.petfinder.com/developers/api-docs/ "Petfinder API Docs").   
+Project Paws utilizes the [Petfinder API](https://www.petfinder.com/developers/api-docs/ "Petfinder API Docs") to allow users to search for adoptable dogs, local shelters, or to meet a random doggy friend. Project Paws is my first capstone project for Thinkful's Flex Web Development Bootcamp.  
 
-See [more information and images](https://github.com/BlueLB84/project_paws/blob/master/ProjectPaws.md "Project Paws user stories, flow, and wireframe") for the initial idea and design process for Project Paws.
+See more Project Paws [information and images](https://github.com/BlueLB84/project_paws/blob/master/ProjectPaws.md "Project Paws user stories, flow, and wireframe") from the initial idea and design process.
 
 
 ### Technology Stack ###
