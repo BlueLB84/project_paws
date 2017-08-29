@@ -3,7 +3,7 @@ const STATE = {
     query: {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
         animal: 'dog',
-        output: 'basic',
+        output: 'full',
         format: 'json',
         location: null,
         sex: null,
@@ -38,32 +38,63 @@ function joinBreeds() {
 	return breedParams.join('&');
 };
 
-function displayPetfinderData(data) {
-    STATE.data = data;
-    console.log(STATE.data);
-    // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
-    // $('.js-results').html(results);
-};
-
 function handlePetFindSubmit(event) {
     $('.js-search-form').on('click','.js-button--dogs',event => {
         event.preventDefault();
+        STATE.method = 'pet.find';
         const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
         const locationVal = queryLocation.val();
         if (locationVal === '') {
             alert('Please enter a location.');
             $('.js-search-location').focus();
         } else {
+            STATE.query.location = locationVal;
             const currentEvent = event;
             filterPetFindSubmit(currentEvent);
+            getDataFromAPI(STATE.method, displayPetfinderData);
+        }
+    })
+};
+
+function handleFindShelterSubmit() {
+    $('.js-search-form').on('click','.js-button--shelters', event => {
+        event.preventDefault();
+        STATE.method = 'shelter.find';
+        const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
+        const locationVal = queryLocation.val();
+        const method = STATE.method;
+        if (locationVal === '') {
+            alert('Please enter a location.');
+            $('.js-search-location').focus();
+        } else {
+            STATE.queryShelter.location = locationVal;
+            getShelterDataFromAPI(method, displayPetfinderData);
+        }
+    })
+};
+
+function handleRandomDogSubmit() {
+    $('.js-search-form').on('click', '.js-button--random', event => {
+        event.preventDefault();
+        STATE.method = 'pet.getRandom';
+        const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
+        const locationVal = queryLocation.val();
+        const currentEvent = event;
+        if (locationVal === '') {
+            STATE.query.location = null;
+            filterPetFindSubmit(currentEvent);
+            STATE.query.age = null;
+            getDataFromAPI(STATE.method, displayPetfinderData);
+        } else {
             STATE.query.location = locationVal;
+            filterPetFindSubmit(currentEvent);
+            STATE.query.age = null;
             getDataFromAPI(STATE.method, displayPetfinderData);
         }
     })
 };
 
 function filterPetFindSubmit(event) {
-    STATE.method = 'pet.find';
     const queryBreed1 = $(event.currentTarget).parent().find('#filters__breed--1');
     const queryBreed1Val = queryBreed1.val();
     STATE.query.breed[0] = queryBreed1Val;
@@ -121,32 +152,11 @@ function filterSexOptions(sex) {
     }
 };
 
-function handleFindShelterSubmit() {
-    $('.js-search-form').on('click','.js-button--shelters', event => {
-        event.preventDefault();
-        const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
-        const locationVal = queryLocation.val();
-        STATE.method = 'shelter.find';
-        const method = STATE.method;
-        if (locationVal === '') {
-            alert('Please enter a location.');
-            $('.js-search-location').focus();
-        } else {
-            STATE.queryShelter.location = locationVal;
-            queryLocation.val('');
-            getShelterDataFromAPI(method, displayPetfinderData);
-        }
-    })
-};
-
-function handleRandomDogSubmit() {
-    $('.js-search-form').on('click', '.js-button--random', event => {
-        event.preventDefault();
-        console.log(STATE.query.location);
-        STATE.method = 'pet.getRandom';
-        const method = STATE.method;
-        // getDataFromAPI(method, displayPetfinderData);
-    })
+function displayPetfinderData(data) {
+    STATE.data = data;
+    console.log(STATE.data);
+    // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
+    // $('.js-results').html(results);
 };
 
 function submitFunctionHandlers() {
