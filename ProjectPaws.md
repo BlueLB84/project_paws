@@ -18,11 +18,14 @@
 
 ## User Flow
 ![Project Paws User Flow 1](/images/PP_user_flow_1.jpg "Project Paws User Flow 1")
+
 ![Project Paws User Flow 2](/images/PP_user_flow_2.jpg "Project Paws User Flow 2")
+
 ![Project Paws User Flow 3](/images/PP_user_flow_3.jpg "Project Paws User Flow 3")
 
 * * *
 
 ## Wireframe
 ![Project Paws Wireframe 1](/images/PP_wireframe_1.jpg "Project Paws Wireframe 1")
+
 ![Project Paws Wireframe 2](/images/PP_wireframe_2.jpg "Project Paws Wireframe 2")
