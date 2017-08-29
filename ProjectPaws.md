@@ -21,7 +21,7 @@
 
 ![Project Paws User Flow 2](/images/PP_user_flow_2.jpg "Project Paws User Flow 2")
 
-![Project Paws User Flow 3](/images/PP_user_flow_3.jpg "Project Paws User Flow 3")
+![Project Paws User Flow 3](/images/PP_user_flow_3.JPG "Project Paws User Flow 3")
 
 * * *
 
