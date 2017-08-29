@@ -53,6 +53,7 @@ function handlePetFindSubmit(event) {
             filterPetFindSubmit(currentEvent);
             getDataFromAPI(STATE.method, displayPetfinderData);
         }
+        handleQueryReset();
     })
 };
 
@@ -70,6 +71,7 @@ function handleFindShelterSubmit() {
             STATE.queryShelter.location = locationVal;
             getShelterDataFromAPI(method, displayPetfinderData);
         }
+        handleQueryShelterReset();
     })
 };
 
@@ -77,9 +79,9 @@ function handleRandomDogSubmit() {
     $('.js-search-form').on('click', '.js-button--random', event => {
         event.preventDefault();
         STATE.method = 'pet.getRandom';
+        const currentEvent = event;
         const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
         const locationVal = queryLocation.val();
-        const currentEvent = event;
         if (locationVal === '') {
             STATE.query.location = null;
             filterPetFindSubmit(currentEvent);
@@ -91,7 +93,35 @@ function handleRandomDogSubmit() {
             STATE.query.age = null;
             getDataFromAPI(STATE.method, displayPetfinderData);
         }
+        handleQueryReset();
     })
+};
+
+$('.js-search-form').on('click', '.js-button--reset', event => {
+    handleQueryReset();
+    handleQueryShelterReset();
+});
+
+function handleQueryReset() {
+    STATE.query = {
+        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
+        animal: 'dog',
+        output: 'full',
+        format: 'json',
+        location: null,
+        sex: null,
+        size: null,
+        age: null,
+        breed: [null,null] 
+    }
+};
+
+function handleQueryShelterReset() {
+    STATE.queryShelter = {
+        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
+        format: 'json',
+        location: null
+    }
 };
 
 function filterPetFindSubmit(event) {
