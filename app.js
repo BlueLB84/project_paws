@@ -9,65 +9,106 @@ const STATE = {
         sex: null,
         size: null,
         age: null,
-        breed1: null,
-        breed2: null  
+        breed: [null,null],  
     },
     petfinder_search_url: 'https://api.petfinder.com/',
     method: null
 }
  
 function getDataFromAPI(method, callback) {
-    let apiURL = STATE.petfinder_search_url + method + "?callback=?";
+    const breedParams = joinBreeds();
+    let apiURL = STATE.petfinder_search_url + method + "?callback=?" + `&${breedParams}&`;
     $.getJSON(apiURL, STATE.query, callback);
   };
 
+function joinBreeds() {
+	let breedParams = STATE.query.breed.map(function(item){
+        return `breed=${item}`;
+    })
+	return breedParams.join('&');
+}
+
 function displayPetfinderData(data) {
     STATE.data = data;
-    console.log(data);
+    console.log(STATE.data);
     // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
     // $('.js-results').html(results);
 }
-
-
 
 function handlePetFindSubmit(event) {
     $('.js-search-form').on('click','.js-button--dogs',event => {
         event.preventDefault();
         const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
         const locationVal = queryLocation.val();
-        // STATE.method = 'pet.find';
-        // const method = STATE.method;
         if (locationVal === '') {
             alert('Please enter a location.');
             $('.js-search-location').focus();
         } else {
             const currentEvent = event;
-            filterPetFindSubmit(currentEvent,locationVal);
-            // STATE.query.location = locationVal;
-            queryLocation.val('');
+            filterPetFindSubmit(currentEvent);
+            STATE.query.location = locationVal;
             getDataFromAPI(STATE.method, displayPetfinderData);
         }
     })
 }
 
-function filterPetFindSubmit(event, location) {
-    STATE.query.location = location;
+function filterPetFindSubmit(event) {
     STATE.method = 'pet.find';
     const queryBreed1 = $(event.currentTarget).parent().find('#filters__breed--1');
     const queryBreed1Val = queryBreed1.val();
-    STATE.query.breed1 = queryBreed1Val;
+    STATE.query.breed[0] = queryBreed1Val;
     const queryBreed2 = $(event.currentTarget).parent().find('#filters__breed--2');
     const queryBreed2Val = queryBreed2.val();
-    STATE.query.breed2 = queryBreed2Val;
-    const querySize = $(event.currentTarget).parent().find('#filters__sexAgeSize--size');
-    const querySizeVal = querySize.val();
-    STATE.query.size = querySizeVal;
-    const queryAge = $(event.currentTarget).parent().find('#filters__sexAgeSize--age');
-    const queryAgeVal = queryAge.val();
+    STATE.query.breed[1] = queryBreed2Val;
+    const querySize = $(event.currentTarget).parent().find('#filters__sexAgeSize--size :selected');
+    const querySizeVal = querySize.text();
+    filterSizeOptions(querySizeVal);
+    const queryAge = $(event.currentTarget).parent().find('#filters__sexAgeSize--age :selected');
+    const queryAgeVal = queryAge.text();
     STATE.query.age = queryAgeVal;
-    const querySex = $(event.currentTarget).parent().find('#filters__sexAgeSize--sex');
-    const querySexVal = querySex.val();
-    STATE.query.sex = querySexVal;
+    const querySex = $(event.currentTarget).parent().find('#filters__sexAgeSize--sex :selected');
+    const querySexVal = querySex.text();
+    filterSexOptions(querySexVal);
+}
+
+function filterSizeOptions(size) {
+    switch(size) {
+        case (''):
+        STATE.query.size = null;
+        break;
+        case ('Small'):
+        STATE.query.size = 'S';
+        break;
+        case ('Medium'):
+        STATE.query.size = 'M';
+        break;
+        case ('Large'):
+        STATE.query.size = "L";
+        break;
+        case('Extra-large'):
+        STATE.query.size = "XL"
+        break;
+        default:
+        STATE.query.size = null;
+        break;
+    }
+}
+
+function filterSexOptions(sex) {
+    switch(sex) {
+        case(''):
+        STATE.query.sex = null;
+        break;
+        case ('Male'):
+        STATE.query.sex = 'M';
+        break;
+        case ('Female'):
+        STATE.query.sex = 'F';
+        break;
+        default:
+        STATE.query.sex = null;
+        break;
+    }
 }
 
 function handleFindShelterSubmit() {
@@ -83,7 +124,7 @@ function handleFindShelterSubmit() {
         } else {
             STATE.query.location = locationVal;
             queryLocation.val('');
-            getDataFromAPI(method, displayPetfinderData);
+            // getDataFromAPI(method, displayPetfinderData);
         }
     })
 }
@@ -94,7 +135,7 @@ function handleRandomDogSubmit() {
         console.log(STATE.query.location);
         STATE.method = 'pet.getRandom';
         const method = STATE.method;
-        getDataFromAPI(method, displayPetfinderData);
+        // getDataFromAPI(method, displayPetfinderData);
     })
 }
 
