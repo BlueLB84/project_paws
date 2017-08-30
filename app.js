@@ -157,61 +157,14 @@ function handleQueryShelterReset() {
 };
 
 function filterPetFindSubmit(event) {
-    const queryBreed1 = $(event.currentTarget).parent().find('#filters__breed--1');
-    const queryBreed1Val = queryBreed1.val();
-    STATE.query.breed[0] = queryBreed1Val;
-    const queryBreed2 = $(event.currentTarget).parent().find('#filters__breed--2');
-    const queryBreed2Val = queryBreed2.val();
-    STATE.query.breed[1] = queryBreed2Val;
-    const querySize = $(event.currentTarget).parent().find('#filters__sexAgeSize--size :selected');
-    const querySizeVal = querySize.text();
-    filterSizeOptions(querySizeVal);
-    const queryAge = $(event.currentTarget).parent().find('#filters__sexAgeSize--age :selected');
-    const queryAgeVal = queryAge.text();
+    STATE.query.breed[0] = $('#filters__breed--1').val();
+    STATE.query.breed[1] = $('#filters__breed--2').val();
+    const querySizeVal = $('#filters__sexAgeSize--size').val();
+    STATE.query.size = querySizeVal;
+    const queryAgeVal = $('#filters__sexAgeSize--age').val();
     STATE.query.age = queryAgeVal;
-    const querySex = $(event.currentTarget).parent().find('#filters__sexAgeSize--sex :selected');
-    const querySexVal = querySex.text();
-    filterSexOptions(querySexVal);
-};
-
-function filterSizeOptions(size) {
-    switch(size) {
-        case (''):
-        STATE.query.size = null;
-        break;
-        case ('Small'):
-        STATE.query.size = 'S';
-        break;
-        case ('Medium'):
-        STATE.query.size = 'M';
-        break;
-        case ('Large'):
-        STATE.query.size = "L";
-        break;
-        case('Extra-large'):
-        STATE.query.size = "XL"
-        break;
-        default:
-        STATE.query.size = null;
-        break;
-    }
-};
-
-function filterSexOptions(sex) {
-    switch(sex) {
-        case(''):
-        STATE.query.sex = null;
-        break;
-        case ('Male'):
-        STATE.query.sex = 'M';
-        break;
-        case ('Female'):
-        STATE.query.sex = 'F';
-        break;
-        default:
-        STATE.query.sex = null;
-        break;
-    }
+    const querySexVal = $('#filters__sexAgeSize--sex').val();
+    STATE.query.sex = querySexVal;
 };
 
 function displayPetfinderData(data) {
