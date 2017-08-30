@@ -172,15 +172,9 @@ function displayPetfinderData(data) {
     console.log(STATE.data);
 };
 
-function functionHandlers() {
+$(document).ready(function() {
     getBreedsFromAPI(renderBreedList);
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();
-};
-
-function testAPI() {
-    functionHandlers();
-};
-
-$(document).ready(testAPI);
+});
