@@ -15,52 +15,61 @@
     </header>
     
     <main role="main" class="js-searchBasic searchBasic">
-        <form action="#" class="js-search-form search_form">
-            <h2>Find A Doggy Friend!</h2>
+        <h2>Find A Doggy Friend!</h2>
+        <section class="js-search-form--shelter shelter-search">
+            <form action="#" class="js-search-form-shelter search_form">
                 <label for="search_form--location" required>*Location</label>
-                <input placeholder="city, state" type="text" name="location" id="search_form--location" class="js-search-location" required/>
+                    <input placeholder="city, state" type="text" name="location" id="search_form--shelter-location" class="js-search-location" required/>
                 <button type="submit" class="js-button--shelters">Find a Shelter</button>
-                    <fieldset name="filter" class="filters">
-                        <legend>Doggy Details</legend>
-                        <section class="filters__breed">
-                            <label for="filters__breed--1">Breed</label>
-                            <input placeholder="dog breed" type="text" name="breed1" id="filters__breed--1" />
+            </form>
+        </section>
+        
+        <section class="dog-search">
+            <form action="#" class="js-search-form search_form">
+                <label for="search_form--location" required>*Location</label>
+                    <input placeholder="city, state" type="text" name="location" id="search_form--location" class="js-search-location" required/>
+                        <fieldset name="filter" class="filters">
+                            <legend>Doggy Details</legend>
+                            <section class="filters__breed">
+                                <label for="filters__breed--1">Breed</label>
+                                <input placeholder="dog breed" type="text" name="breed1" id="filters__breed--1" />
 
-                            <label for="filters__breed--2">Breed</label>
-                            <input placeholder="dog breed" type="text" name="breed2" id="filters__breed--2" />
-                        </section>
-                        
-                        <section class="filters__sexAgeSize">
-                            <label for="filters__sexAgeSize--age">Size:</label>
-                            <select name="age" id="filters__sexAgeSize--size">
-                                <option value=""></option>
-                                <option value="S">Small</option>
-                                <option value="M">Medium</option>
-                                <option value="L">Large</option>
-                                <option value="XL">Extra-large</option>
-                            </select>
+                                <label for="filters__breed--2">Breed</label>
+                                <input placeholder="dog breed" type="text" name="breed2" id="filters__breed--2" />
+                            </section>
+                            
+                            <section class="filters__sexAgeSize">
+                                <label for="filters__sexAgeSize--age">Size:</label>
+                                <select name="age" id="filters__sexAgeSize--size">
+                                    <option value=""></option>
+                                    <option value="S">Small</option>
+                                    <option value="M">Medium</option>
+                                    <option value="L">Large</option>
+                                    <option value="XL">Extra-large</option>
+                                </select>
 
-                            <label for="filters__sexAgeSize--size">Age:</label>
-                            <select name="size" id="filters__sexAgeSize--age">
-                                <option value=""></option>
-                                <option value="Baby">Baby</option>
-                                <option value="Young">Young</option>
-                                <option value="Adult">Adult</option>
-                                <option value="Senior">Senior</option>
-                            </select>
+                                <label for="filters__sexAgeSize--size">Age:</label>
+                                <select name="size" id="filters__sexAgeSize--age">
+                                    <option value=""></option>
+                                    <option value="Baby">Baby</option>
+                                    <option value="Young">Young</option>
+                                    <option value="Adult">Adult</option>
+                                    <option value="Senior">Senior</option>
+                                </select>
 
-                            <label for="filters__sexAgeSize--sex">Sex:</label>
-                            <select name="sex" id="filters__sexAgeSize--sex">
-                                <option value=""></option>
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
-                            </select>
-                        </section>    
-                </fieldset>
-                <button type="submit" class="js-button--dogs">Find Dogs</button>
-                <button type="submit" class="js-button--random">Meet a Random Dog</button>
-                <button type="reset" class="js-button--reset">Reset Doggy Details</button>
-        </form>
+                                <label for="filters__sexAgeSize--sex">Sex:</label>
+                                <select name="sex" id="filters__sexAgeSize--sex">
+                                    <option value=""></option>
+                                    <option value="F">Female</option>
+                                    <option value="M">Male</option>
+                                </select>
+                            </section>    
+                    </fieldset>
+                    <button type="submit" class="js-button--dogs">Find Dogs</button>
+                    <button type="submit" class="js-button--random">Meet a Random Dog</button>
+                    <button type="reset" class="js-button--reset">Reset Doggy Details</button>
+            </form>
+        </section>
     </main>
     
     <section class="js-results results">

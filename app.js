@@ -36,8 +36,7 @@ function getBreedsFromAPI(callback) {
 
 function renderBreedList(data) {
     STATE.breed_data = data;
-    const results = buildBreedsArr();
-    STATE.breeds_arr = results;
+    STATE.breeds_arr = buildBreedsArr();
     STATE.breeds_autocomplete.data = STATE.breeds_arr;
     $("#filters__breed--1").easyAutocomplete(STATE.breeds_autocomplete);
     $("#filters__breed--2").easyAutocomplete(STATE.breeds_autocomplete);
@@ -46,7 +45,7 @@ function renderBreedList(data) {
 function buildBreedsArr() {
     const results = STATE.breed_data.petfinder.breeds.breed; 
     const breedsArr = [];
-    let breedsArrMaker = results.map(function(item){
+    results.map(function(item){
         return breedsArr.push(item.$t);
     })
     return breedsArr;
@@ -70,40 +69,24 @@ function joinBreeds() {
 	return breedParams.join('&');
 };
 
-function handlePetFindSubmit(event) {
-    $('.js-search-form').on('click','.js-button--dogs',event => {
+function handleFindShelterSubmit() {
+    $('.js-search-form--shelter').submit(event => {
         event.preventDefault();
-        STATE.method = 'pet.find';
-        const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
-        const locationVal = queryLocation.val();
-        if (locationVal === '') {
-            alert('Please enter a location.');
-            $('.js-search-location').focus();
-        } else {
-            STATE.query.location = locationVal;
-            const currentEvent = event;
-            filterPetFindSubmit(currentEvent);
-            getDataFromAPI(STATE.method, displayPetfinderData);
-        }
-        handleQueryReset();
+        STATE.method = 'shelter.find';
+        STATE.queryShelter.location = $('#search_form--shelter-location').val();
+        getShelterDataFromAPI(STATE.method, displayPetfinderData);
+        handleQueryShelterReset();
     })
 };
 
-function handleFindShelterSubmit() {
-    $('.js-search-form').on('click','.js-button--shelters', event => {
+function handlePetFindSubmit(event) {
+    $('.js-search-form').submit(event => {
         event.preventDefault();
-        STATE.method = 'shelter.find';
-        const queryLocation = $(event.currentTarget).parent().find('.js-search-location');
-        const locationVal = queryLocation.val();
-        const method = STATE.method;
-        if (locationVal === '') {
-            alert('Please enter a location.');
-            $('.js-search-location').focus();
-        } else {
-            STATE.queryShelter.location = locationVal;
-            getShelterDataFromAPI(method, displayPetfinderData);
-        }
-        handleQueryShelterReset();
+        STATE.method = 'pet.find';
+        STATE.query.location = $('#search_form--location').val();
+        filterPetFindSubmit(event);
+        getDataFromAPI(STATE.method, displayPetfinderData);
+        handleQueryReset();
     })
 };
 
