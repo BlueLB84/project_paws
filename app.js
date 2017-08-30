@@ -1,5 +1,4 @@
 const STATE = {
-    data: null,
     query: {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
         animal: 'dog',
@@ -16,10 +15,43 @@ const STATE = {
         format: 'json',
         location: null
     },
+    data: null,
+    breed_data: null,
+    breeds_arr: [],
+    breeds_autocomplete: {list: {match: {enabled: true}}},
     petfinder_search_url: 'https://api.petfinder.com/',
-    method: null
+    method: null,
+    breed_method: 'breed.list'
 };
  
+function getBreedsFromAPI(callback) {
+    const query = {
+        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
+        animal: 'dog',
+        format: 'json' 
+    }
+    const apiURL = STATE.petfinder_search_url + STATE.breed_method + "?callback=?";
+    $.getJSON(apiURL, query, callback);
+};
+
+function renderBreedList(data) {
+    STATE.breed_data = data;
+    const results = buildBreedsArr();
+    STATE.breeds_arr = results;
+    STATE.breeds_autocomplete.data = STATE.breeds_arr;
+    $("#filters__breed--1").easyAutocomplete(STATE.breeds_autocomplete);
+    $("#filters__breed--2").easyAutocomplete(STATE.breeds_autocomplete);
+};
+
+function buildBreedsArr() {
+    const results = STATE.breed_data.petfinder.breeds.breed; 
+    const breedsArr = [];
+    let breedsArrMaker = results.map(function(item){
+        return breedsArr.push(item.$t);
+    })
+    return breedsArr;
+}
+
 function getDataFromAPI(method, callback) {
     const breedParams = joinBreeds();
     let apiURL = STATE.petfinder_search_url + method + "?callback=?" + `&${breedParams}&`;
@@ -185,18 +217,17 @@ function filterSexOptions(sex) {
 function displayPetfinderData(data) {
     STATE.data = data;
     console.log(STATE.data);
-    // const results = `<div><p>${STATE.data.explanation}</p><img src="${STATE.data.hdurl}" /></div>`;
-    // $('.js-results').html(results);
 };
 
-function submitFunctionHandlers() {
+function functionHandlers() {
+    getBreedsFromAPI(renderBreedList);
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();
 };
 
 function testAPI() {
-    submitFunctionHandlers();
+    functionHandlers();
 };
 
 $(document).ready(testAPI);
