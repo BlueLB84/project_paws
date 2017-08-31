@@ -74,7 +74,7 @@ function handleFindShelterSubmit() {
         event.preventDefault();
         STATE.method = 'shelter.find';
         STATE.queryShelter.location = $('#search_form--shelter-location').val();
-        getShelterDataFromAPI(STATE.method, displayPetfinderData);
+        getShelterDataFromAPI(STATE.method, displayShelterList);
         handleQueryShelterReset();
     })
 };
@@ -154,6 +154,23 @@ function displayPetfinderData(data) {
     STATE.data = data;
     console.log(STATE.data);
 };
+
+function displayShelterList(data) {
+    STATE.data = data;
+    const results = data.petfinder.shelters.shelter.map((item, index) => {
+        return renderShelterList(item);
+    });
+    $('.js-results').html(results);
+};
+
+function renderShelterList(result) {
+    return `
+    <div class="result-shelter">
+        <h3 id="${result.id.$t}" class="shelter-name">${result.name.$t}</h3>
+        <p>${result.city.$t}, ${result.state.$t}</p>
+    </div>
+    `;
+}
 
 $(document).ready(function() {
     getBreedsFromAPI(renderBreedList);
