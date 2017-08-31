@@ -15,8 +15,16 @@ const STATE = {
         format: 'json',
         location: null
     },
-    shelterID: null,
+    queryShelterAnimals: {
+        key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
+        format: 'json',
+        id: null,
+        status: 'A',
+        output: 'full'
+    },
     data: null,
+    shelterListData: null,
+    shelterData: null,
     breed_data: null,
     breeds_arr: [],
     breeds_autocomplete: {list: {match: {enabled: true}}},
@@ -58,9 +66,14 @@ function getDataFromAPI(method, callback) {
     $.getJSON(apiURL, STATE.query, callback);
   };
 
-function getShelterDataFromAPI(method, callback) {
+function getShelterListFromAPI(method, callback) {
     let apiURL = STATE.petfinder_search_url + method + "?callback=?";
     $.getJSON(apiURL, STATE.queryShelter, callback);
+};
+
+function getShelterDataFromAPI(method, callback) {
+    let apiURL = STATE.petfinder_search_url + method + "?callback=?";
+    $.getJSON(apiURL, STATE.queryShelterAnimals, callback);
 };
 
 function joinBreeds() {
@@ -75,7 +88,7 @@ function handleFindShelterSubmit() {
         event.preventDefault();
         STATE.method = 'shelter.find';
         STATE.queryShelter.location = $('#search_form--shelter-location').val();
-        getShelterDataFromAPI(STATE.method, displayShelterList);
+        getShelterListFromAPI(STATE.method, displayShelterList);
         handleQueryShelterReset();
     })
 };
@@ -157,12 +170,17 @@ function displayPetfinderData(data) {
 };
 
 function displayShelterList(data) {
-    STATE.data = data;
+    STATE.shelterListData = data;
     console.log(data.petfinder.shelters.shelter);
     const results = data.petfinder.shelters.shelter.map((item, index) => {
         return renderShelterList(item);
     });
     $('.js-results-shelters').html(results);
+};
+
+function displayShelterData(data) {
+    STATE.shelterData = data;
+    console.log(STATE.shelterData);
 };
 
 function renderShelterList(result) {
@@ -175,8 +193,9 @@ function renderShelterList(result) {
 }
 
 $('.js-results-shelters').on('click', 'h3', event => {
-    STATE.shelterID = $(event.currentTarget).attr('id');
-    console.log(STATE.shelterID);
+    STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
+    STATE.method = 'shelter.getPets';
+    getShelterDataFromAPI(STATE.method, displayShelterData);
 })
 
 $(document).ready(function() {
