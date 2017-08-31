@@ -15,6 +15,7 @@ const STATE = {
         format: 'json',
         location: null
     },
+    shelterID: null,
     data: null,
     breed_data: null,
     breeds_arr: [],
@@ -157,20 +158,26 @@ function displayPetfinderData(data) {
 
 function displayShelterList(data) {
     STATE.data = data;
+    console.log(data.petfinder.shelters.shelter);
     const results = data.petfinder.shelters.shelter.map((item, index) => {
         return renderShelterList(item);
     });
-    $('.js-results').html(results);
+    $('.js-results-shelters').html(results);
 };
 
 function renderShelterList(result) {
     return `
     <div class="result-shelter">
-        <h3 id="${result.id.$t}" class="shelter-name">${result.name.$t}</h3>
-        <p>${result.city.$t}, ${result.state.$t}</p>
+        <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>
+        <p>${result.city.$t}, ${result.state.$t} <i class="fa fa-paw" aria-hidden="true"></i> ${result.phone.$t}</p>
     </div>
     `;
 }
+
+$('.js-results-shelters').on('click', 'h3', event => {
+    STATE.shelterID = $(event.currentTarget).attr('id');
+    console.log(STATE.shelterID);
+})
 
 $(document).ready(function() {
     getBreedsFromAPI(renderBreedList);
