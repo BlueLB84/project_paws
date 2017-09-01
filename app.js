@@ -203,7 +203,7 @@ function renderPetResults(result) {
         gender = 'Female';
     }
     if(result.sex.$t === 'M') {
-        gender = 'Male'
+        gender = 'Male';
     }
     if(Array.isArray(result.breeds.breed)) {
         breed = `${result.breeds.breed[0].$t} & ${result.breeds.breed[1].$t}`;
@@ -246,8 +246,12 @@ function displayShelterList(data) {
 function displayShelterData(data) {
     STATE.shelterData = data;
     STATE.route = 'shelter-animals';
-    console.log(STATE.shelterData);
+    const results = data.petfinder.pets.pet.map((item, index) => {
+        return renderPetResults(item);
+    });
+    $('.js-results-shelter-animals').html(`${results} <button class="js-return-shelter-list button-return">Return to Shelter Result List</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
+    console.log(STATE.shelterData);
 };
 
 function renderShelterList(result) {
@@ -257,13 +261,18 @@ function renderShelterList(result) {
         <p>${result.city.$t}, ${result.state.$t} <i class="fa fa-paw" aria-hidden="true"></i> ${result.phone.$t}</p>
     </div>
     `;
-}
+};
 
 $('.js-results-shelters').on('click', 'h3', event => {
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
     getShelterDataFromAPI(STATE.method, displayShelterData);
-})
+});
+
+$('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
+    STATE.route = 'shelter-list';
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
+});
 
 $(document).ready(function() {
     getBreedsFromAPI(renderBreedList);

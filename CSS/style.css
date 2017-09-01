@@ -24,6 +24,11 @@ footer {
     z-index: 1;
 }
 
+.shelter-search {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .results-area {
     margin-bottom: 50px;
 }
