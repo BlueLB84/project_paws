@@ -223,12 +223,6 @@ function renderPetResults(result) {
     `;
 }
 
-var words = ["spray", "limit", "elite", "exuberant", "destruction", "present"];
-
-var longWords = words.filter(word => word.length > 6);
-
-// Filtered array longWords is ["exuberant", "destruction", "present"]
-
 function displayImages(images) {
     let photoArr = images.media.photos.photo;
     let photoArrFilter = photoArr.filter(pic => pic['@size'] === 'fpm');
