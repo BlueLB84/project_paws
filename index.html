@@ -14,7 +14,16 @@
         <h1>Project Paws</h1>
     </header>
     
-    <main role="main" class="js-searchBasic searchBasic">
+    <div class="js-start-modal--container start-modal--container">
+        <div class="js-start-modal start-modal">
+                <h2>Welcome to Project Paws!</h2>
+                <p>You can search for local shelters and shelter animals, search dogs across the US, and meet a random doggy friend!</p>
+                <button class="js-button--start">Start Your Search!</button>        
+        </div> 
+    </div>   
+    
+    
+    <main role="main" class="js-search search">
         <h2>Find A Doggy Friend!</h2>
         <section class="js-search-form--shelter shelter-search">
             <form action="#" class="js-search-form-shelter search_form">
@@ -71,13 +80,23 @@
             </form>
         </section>
     </main>
+    <div class="results-area">
+        <section class="js-results results">
+        </section>
+
+        <section class="js-results-shelters results">
+                <p>js-results-shelters section showing</p>
+        </section>
+
+        <section class="js-results-shelter-animals results">
+                <p>js-results-shelter-animals section showing</p>
+        </section>
+
+        <section class="js-results-single results">
+            <p>js-results-single section showing</p>
+        </section>
+    </div>
     
-    <section class="js-results results">
-    </section>
-
-    <section class="js-results-shelters results">
-    </section>
-
     <footer role="content-info">
         <p>Powered by Petfinder API <i class="fa fa-paw" aria-hidden="true"></i> <a href="https://www.petfinder.com/" target="_blank">Petfinder.com</a></p>
         <p>See more projects by Lindsey Barbee-Vargas on <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/bluelb84" target="_blank">Github</a></p>

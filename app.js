@@ -22,6 +22,7 @@ const STATE = {
         status: 'A',
         output: 'full'
     },
+    route: 'start',
     data: null,
     shelterListData: null,
     shelterData: null,
@@ -32,7 +33,26 @@ const STATE = {
     method: null,
     breed_method: 'breed.list'
 };
+
+const PAGE_VIEWS = {
+    'start': $('.js-start-modal-container'),
+    'dog-results': $('.js-results'),
+    'shelter-list': $('.js-results-shelters'),
+    'shelter-animals': $('.js-results-shelter-animals'),
+    'single-animal': $('.js-results-single')
+};
+
+function renderProjectPaws(currentRoute, elements) {
+    Object.keys(elements).forEach(function(route) {
+        elements[route].hide();
+    });
+    elements[currentRoute].show();
+}
  
+$('.js-button--start').click(event => {
+    $('.js-start-modal--container').hide();
+});
+
 function getBreedsFromAPI(callback) {
     const query = {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
@@ -166,21 +186,74 @@ function filterPetFindSubmit(event) {
 
 function displayPetfinderData(data) {
     STATE.data = data;
+    STATE.route = 'dog-results';
+    const results = data.petfinder.pets.pet.map((item, index) => {
+        return renderPetResults(item);
+    });
+    $('.js-results').html(results);
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
     console.log(STATE.data);
 };
 
+function renderPetResults(result) {
+    let gender = '';
+    let breed = '';
+    let images = displayImages(result);
+    if(result.sex.$t === 'F') {
+        gender = 'Female';
+    }
+    if(result.sex.$t === 'M') {
+        gender = 'Male'
+    }
+    if(Array.isArray(result.breeds.breed)) {
+        breed = `${result.breeds.breed[0].$t} & ${result.breeds.breed[1].$t}`;
+    } else {
+        breed = result.breeds.breed.$t;
+    }
+    
+    return `
+    <div class="result-dog">
+        <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
+        <div class="img-thumbnails">
+        ${images}
+        </div>
+        <p>${gender} ${breed} <i class="fa fa-paw" aria-hidden="true"></i> ${result.contact.city.$t}, 
+        ${result.contact.state.$t}</p>
+    </div>
+    `;
+}
+
+var words = ["spray", "limit", "elite", "exuberant", "destruction", "present"];
+
+var longWords = words.filter(word => word.length > 6);
+
+// Filtered array longWords is ["exuberant", "destruction", "present"]
+
+function displayImages(images) {
+    let photoArr = images.media.photos.photo;
+    let photoArrFilter = photoArr.filter(pic => pic['@size'] === 'fpm');
+    let photoSrc = photoArrFilter.map((item, index) => {
+        return `<img src="${item.$t} alt="${images.name.$t}"/>`;
+    });
+    return photoSrc.join(' ');
+}
+
 function displayShelterList(data) {
     STATE.shelterListData = data;
+    STATE.route = 'shelter-list';
     console.log(data.petfinder.shelters.shelter);
     const results = data.petfinder.shelters.shelter.map((item, index) => {
         return renderShelterList(item);
     });
     $('.js-results-shelters').html(results);
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
 
 function displayShelterData(data) {
     STATE.shelterData = data;
+    STATE.route = 'shelter-animals';
     console.log(STATE.shelterData);
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
 
 function renderShelterList(result) {
@@ -200,6 +273,7 @@ $('.js-results-shelters').on('click', 'h3', event => {
 
 $(document).ready(function() {
     getBreedsFromAPI(renderBreedList);
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();

@@ -5,7 +5,6 @@
     font-size: 100%;
 }
 
-
 /* Layout Properties (position, float, clear, display)
 Box Model Properties (width, height, margin, padding)
 Visual Properties (color, background, border, box-shadow)
@@ -14,6 +13,49 @@ Misc Properties (cursor, overflow, z-index) */
 
 /* LBV styling */
 
+body {
+    position: relative;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    margin-top: 15px;
+    z-index: 1;
+}
+
+.results-area {
+    margin-bottom: 50px;
+}
 .result-shelter-name:hover {
     cursor: pointer;
+    color: #18D203;
+}
+
+.start-modal--container {
+    position: absolute;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.start-modal {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+    width: 70%;
+    height: 500px;
+    background-color: blue;
+    border: 2px solid grey;
+    border-radius: 4px;
+}
+
+.result-dog {
+    margin: 10px auto 10px auto;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 4px;
 }
