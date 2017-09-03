@@ -224,6 +224,10 @@ function renderPetResults(result) {
 }
 
 function displayImages(images) {
+    console.log(images);
+    if(!images.media) {
+        return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
+    };
     if (!images.media.photos) {
         return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
     };
@@ -273,13 +277,11 @@ $('.js-results-shelters').on('click', 'h3', event => {
     let shelterName = $(event.currentTarget).text().split(' ').join('');
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
-    history.pushState({}, "name_of_shelter", `${shelterName}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
 });
 
 $('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
     STATE.route = 'shelter-list';
-    history.pushState({}, "home", '/');
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 });
 
