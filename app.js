@@ -224,12 +224,10 @@ function renderPetResults(result) {
 }
 
 function displayImages(images) {
-    console.log(images);
     if (!images.media.photos) {
         return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
     };
-    let photoArr = images.media.photos.photo;
-    let photoSrc = photoArr.filter(pic => pic['@size'] === 'fpm').map((item, index) => {
+    let photoSrc = images.media.photos.photo.filter(pic => pic['@size'] === 'fpm').map((item, index) => {
         return `<img src="${item.$t} alt="${images.name.$t}"/>`;
     });
     return photoSrc.join(' ');
@@ -238,7 +236,6 @@ function displayImages(images) {
 function displayShelterList(data) {
     STATE.shelterListData = data;
     STATE.route = 'shelter-list';
-    console.log(data.petfinder.shelters.shelter);
     const results = data.petfinder.shelters.shelter.map((item, index) => {
         return renderShelterList(item);
     });
@@ -249,7 +246,6 @@ function displayShelterList(data) {
 function displayShelterData(data) {
     STATE.shelterData = data;
     STATE.route = 'shelter-animals';
-    console.log(data);
     const pets = data.petfinder.pets.pet;
     let results = null;
     if (Array.isArray(pets)) {
@@ -274,9 +270,10 @@ function renderShelterList(result) {
 };
 
 $('.js-results-shelters').on('click', 'h3', event => {
+    let shelterName = $(event.currentTarget).text().split(' ').join('');
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
-    history.pushState({}, "name_of_shelter", `shelter-${STATE.queryShelterAnimals.id}`);
+    history.pushState({}, "name_of_shelter", `${shelterName}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
 });
 
