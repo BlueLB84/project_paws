@@ -28,7 +28,7 @@
         <section class="js-search-form--shelter shelter-search">
             <form action="#" class="js-search-form-shelter search_form">
                 <label for="search_form--location" required>*Location</label>
-                    <input placeholder="city, state" type="text" name="location" id="search_form--shelter-location" class="js-search-location" required/>
+                    <input placeholder="city, state" type="text" name="location" id="search_form--shelter-location" class="js-search-location" size="35" required/>
                 <button type="submit" class="js-button--shelters">Find a Shelter</button>
             </form>
         </section>
@@ -36,7 +36,7 @@
         <section class="dog-search">
             <form action="#" class="js-search-form search_form">
                 <label for="search_form--location" required>*Location</label>
-                    <input placeholder="city, state" type="text" name="location" id="search_form--location" class="js-search-location" required/>
+                    <input placeholder="city, state" type="text" name="location" id="search_form--location" class="js-search-location" size="35" required/>
                         <fieldset name="filter" class="filters">
                             <legend>Doggy Details</legend>
                             <section class="filters__breed">
@@ -85,15 +85,15 @@
         </section>
 
         <section class="js-results-shelters results">
-                <p>js-results-shelters section showing</p>
+                
         </section>
 
         <section class="js-results-shelter-animals results">
-                <p>js-results-shelter-animals section showing</p>
+                
         </section>
 
         <section class="js-results-single results">
-            <p>js-results-single section showing</p>
+            
         </section>
     </div>
     
@@ -102,8 +102,10 @@
         <p>See more projects by Lindsey Barbee-Vargas on <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/bluelb84" target="_blank">Github</a></p>
     </footer>
 
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="jquery.easy-autocomplete.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARnKMfya-RI_Sn8MWJ_oM6RS-e8JaJufM&libraries=places&callback=autocompleteLocations"></script>
 </body>
 </html>

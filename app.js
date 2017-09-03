@@ -53,6 +53,22 @@ $('.js-button--start').click(event => {
     $('.js-start-modal--container').hide();
 });
 
+
+// GOOGLE MAPS AUTOCOMPLETE 
+function autocompleteLocations() {
+    let input = document.getElementById('search_form--shelter-location');
+    let input2 = document.getElementById('search_form--location');
+    let opts = {
+        types: ['(cities)']
+      };
+    let autocomplete = new google.maps.places.Autocomplete(input, opts);
+    let autocomplete2 = new google.maps.places.Autocomplete(input2, opts);
+    autocomplete.setComponentRestrictions(
+        {'country': 'us'});
+    autocomplete2.setComponentRestrictions(
+        {'country': 'us'});
+};
+
 function getBreedsFromAPI(callback) {
     const query = {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
@@ -135,12 +151,12 @@ function handleRandomDogSubmit() {
             STATE.query.location = null;
             filterPetFindSubmit(currentEvent);
             STATE.query.age = null;
-            getDataFromAPI(STATE.method, displayPetfinderData);
+            getDataFromAPI(STATE.method, displayRandomDogData);
         } else {
             STATE.query.location = locationVal;
             filterPetFindSubmit(currentEvent);
             STATE.query.age = null;
-            getDataFromAPI(STATE.method, displayPetfinderData);
+            getDataFromAPI(STATE.method, displayRandomDogData);
         }
         handleQueryReset();
     })
@@ -185,6 +201,7 @@ function filterPetFindSubmit(event) {
 };
 
 function displayPetfinderData(data) {
+    console.log(data);
     STATE.data = data;
     STATE.route = 'dog-results';
     const results = data.petfinder.pets.pet.map((item, index) => {
@@ -192,13 +209,30 @@ function displayPetfinderData(data) {
     });
     $('.js-results').html(results);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
-    console.log(STATE.data);
+};
+
+function displayRandomDogData(data) {
+    STATE.data = data;
+    STATE.route = 'single-animal';
+    const results = renderPetResults(data.petfinder.pet);
+    $('.js-results-single').html(results);
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
 
 function renderPetResults(result) {
+    if (result === undefined) {
+        return `<div class="result-dog">
+        <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
+        <figure>
+        <img src="images/chief_sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
+        <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank"> @chiefandzoe</a></figcaption>
+        </figure>
+        </div>`
+    }
     let gender = '';
     let breed = '';
     let images = displayImages(result);
+    let heroImg = images[0];
     if(result.sex.$t === 'F') {
         gender = 'Female';
     }
@@ -210,31 +244,56 @@ function renderPetResults(result) {
     } else {
         breed = result.breeds.breed.$t;
     }
+    if (!('$t' in result.contact.phone)) {
+        phoneNumber = 'Phone Number Not Available';
+    } else {
+        phoneNumber = result.contact.phone.$t;
+    }
+    if (!result.contact.email) {
+        email = 'Email Not Available';
+    } else {
+        email = result.contact.email.$t
+    }
     
     return `
     <div class="result-dog">
         <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
-        <div class="img-thumbnails">
-        ${images}
+        <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i> ${result.contact.city.$t}, 
+        ${result.contact.state.$t}<br>
+        Contact: <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
+        </p>
+        <div class="js-image-block">
+        <div class="hero">
+        ${heroImg}
         </div>
-        <p>${gender} ${breed} <i class="fa fa-paw" aria-hidden="true"></i> ${result.contact.city.$t}, 
-        ${result.contact.state.$t}</p>
+        <div class="thumbnails">
+        ${images.join(' ')}
+        </div>
+        </div>
+        <p>${result.description.$t}</p>
     </div>
     `;
 }
 
 function displayImages(images) {
-    console.log(images);
-    if(!images.media) {
-        return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
+    if(!images || !images.media.photos) {
+        return `<figure>
+        <img src="images/zoe_no_image.jpg" alt="no image available" />
+        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe</a> </figcaption>
+        </figure>`
     };
-    if (!images.media.photos) {
-        return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
-    };
-    let photoSrc = images.media.photos.photo.filter(pic => pic['@size'] === 'fpm').map((item, index) => {
-        return `<img src="${item.$t} alt="${images.name.$t}"/>`;
+    let photoSrc = images.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
+        return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t} alt="${images.name.$t}" index="${index}"/></a>`;
     });
-    return photoSrc.join(' ');
+    return photoSrc;
+}
+
+function handleThumbnailClicks() {
+    $('.js-results, .js-results-shelter-animals, .js-results-single').on('click', '.thumbnail', function(event) {
+        const imgSrc = $(event.currentTarget).find('img').attr('src');
+        const imgAlt = $(event.currentTarget).find('img').attr('alt');
+        $(event.currentTarget).closest('.js-image-block').find('.hero img').attr('src', imgSrc).attr('alt', imgAlt);
+    });
 }
 
 function displayShelterList(data) {
@@ -261,14 +320,25 @@ function displayShelterData(data) {
     }
     $('.js-results-shelter-animals').html(`${results.join('')} <button class="js-return-shelter-list button-return">Return to Shelter Result List</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
-    // console.log(STATE.shelterData);
 };
 
 function renderShelterList(result) {
+    let phoneNumber = null;
+    let email = null;
+    if (!('$t' in result.phone)) {
+        phoneNumber = 'Phone Number Not Available';
+    } else {
+        phoneNumber = result.phone.$t;
+    }
+    if (!result.email || !('$t' in result.email)) {
+        email = 'Email Not Available';
+    } else {
+        email = result.email.$t
+    }
     return `
     <div class="result-shelter">
         <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>
-        <p>${result.city.$t}, ${result.state.$t} <i class="fa fa-paw" aria-hidden="true"></i> ${result.phone.$t}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> ${result.city.$t}, ${result.state.$t}  <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}</p>
     </div>
     `;
 };
@@ -291,4 +361,5 @@ $(document).ready(function() {
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();
+    handleThumbnailClicks()
 });

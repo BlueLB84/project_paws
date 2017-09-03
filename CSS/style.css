@@ -64,3 +64,27 @@ footer {
     border: 1px solid black;
     border-radius: 4px;
 }
+
+.hero {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .hero img {
+    height: 100%
+  }
+  
+  
+  .thumbnails {
+    display: inline-block;
+    cursor: pointer;
+    height: 100px;
+  }
+  
+  a.thumbnail:hover {
+    box-shadow: 1px 1px 1px gray;
+  }
+  
+  .thumbnail img {
+    max-height: 100%;
+  }
