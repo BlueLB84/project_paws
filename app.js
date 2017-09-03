@@ -224,9 +224,12 @@ function renderPetResults(result) {
 }
 
 function displayImages(images) {
+    console.log(images);
+    if (!images.media.photos) {
+        return `<img src="http://via.placeholder.com/350x150" alt="no image available" />`
+    };
     let photoArr = images.media.photos.photo;
-    let photoArrFilter = photoArr.filter(pic => pic['@size'] === 'fpm');
-    let photoSrc = photoArrFilter.map((item, index) => {
+    let photoSrc = photoArr.filter(pic => pic['@size'] === 'fpm').map((item, index) => {
         return `<img src="${item.$t} alt="${images.name.$t}"/>`;
     });
     return photoSrc.join(' ');
@@ -246,12 +249,19 @@ function displayShelterList(data) {
 function displayShelterData(data) {
     STATE.shelterData = data;
     STATE.route = 'shelter-animals';
-    const results = data.petfinder.pets.pet.map((item, index) => {
-        return renderPetResults(item);
-    });
-    $('.js-results-shelter-animals').html(`${results} <button class="js-return-shelter-list button-return">Return to Shelter Result List</button>`);
+    console.log(data);
+    const pets = data.petfinder.pets.pet;
+    let results = null;
+    if (Array.isArray(pets)) {
+        results = data.petfinder.pets.pet.map((item, index) => {
+            return renderPetResults(item);
+        });
+    } else {
+        results = [renderPetResults(pets)];
+    }
+    $('.js-results-shelter-animals').html(`${results.join('')} <button class="js-return-shelter-list button-return">Return to Shelter Result List</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
-    console.log(STATE.shelterData);
+    // console.log(STATE.shelterData);
 };
 
 function renderShelterList(result) {
@@ -266,11 +276,13 @@ function renderShelterList(result) {
 $('.js-results-shelters').on('click', 'h3', event => {
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
+    history.pushState({}, "name_of_shelter", `shelter-${STATE.queryShelterAnimals.id}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
 });
 
 $('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
     STATE.route = 'shelter-list';
+    history.pushState({}, "home", '/');
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 });
 
