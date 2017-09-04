@@ -17,11 +17,120 @@ body {
     position: relative;
 }
 
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 4rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+main h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.dog-search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.search_form--label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.js-search-location {
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow:0 1px 1px rgba(0,0,0,0.1)
+}
+
+fieldset {
+    width: 100%;
+    margin-top: 15px;
+    padding: 20px 10px;
+}
+
+fieldset legend {
+    text-align: center;
+}
+
+.filters__sexAgeSize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.filters__sexAgeSize select {
+    margin: 0px 15px 0px 5px;
+}
+
+.filters__breed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.filters__breed div {
+    display: inline-block;
+    flex: 1;
+}
+
+.filters__breed div:first-child {
+    margin-right: 15px;
+}
+
+.search-buttons {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+main button, .button-return {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #CCFF66;
+    border: 1px solid #373F51;
+    border-radius: 2px;
+    color: #373F51;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 footer {
     position: fixed;
     bottom: 0;
-    margin-top: 15px;
+    margin-top: 30px;
     z-index: 1;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	flex-direction: column;
+    background-color: #373F51;
+    color: #4ECDC4;
+}
+
+footer i, a {
+    color: #FBFBFF;
 }
 
 .shelter-search {
@@ -30,43 +139,87 @@ footer {
 }
 
 .results-area {
-    margin-bottom: 50px;
-}
-.result-shelter-name:hover {
-    cursor: pointer;
-    color: #18D203;
-}
-
-.start-modal--container {
-    position: absolute;
-    top: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 80px;
     width: 100%;
-    z-index: 1;
 }
 
-.start-modal {
+.results {
     display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-    width: 70%;
-    height: 500px;
-    background-color: blue;
-    border: 2px solid grey;
-    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+}
+
+.results-shelters {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.result-shelter {
+    width: 100%;
+    margin-bottom: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 5px;
+    border-top: 1px solid grey;
+}
+
+.result-shelter i {
+    margin-right: 2px;
+    margin-left: 8px;
+    color: #4ECDC4;
+}
+
+.result-shelter i:first-child {
+    margin-left: 0px;
+}
+
+.result-shelter-name {
+    font-size: 1.1rem;
+    padding-bottom: 2px;
+}
+
+.result-shelter-name:hover {
+    cursor: pointer;
+    color: #FF3F10;
 }
 
 .result-dog {
-    margin: 10px auto 10px auto;
-    width: 80%;
+    text-align: center;
+    margin: 10px auto 25px auto;
+    padding: 10px;
+    width: 100%;
     border: 1px solid black;
     border-radius: 4px;
 }
 
+.result-dog h3 {
+    font-size: 1.2rem;
+    padding-bottom: 2px;
+}
+
+.result-dog i {
+    margin-left: 8px;
+    margin-right: 2px;
+    color: #4ECDC4;
+}
+
+.result-dog p:last-child {
+    text-align: left;
+}
+
 .hero {
     height: 300px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
   
@@ -74,9 +227,9 @@ footer {
     height: 100%
   }
   
-  
   .thumbnails {
     display: inline-block;
+    margin-bottom: 15px;
     cursor: pointer;
     height: 100px;
   }
@@ -87,4 +240,8 @@ footer {
   
   .thumbnail img {
     max-height: 100%;
+  }
+
+  .instagram {
+      color: #4ECDC4;
   }

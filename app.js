@@ -222,7 +222,7 @@ function renderPetResults(result) {
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
         <figure>
         <img src="images/chief_sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
-        <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank"> @chiefandzoe</a></figcaption>
+        <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
         </figure>
         </div>`
     }
@@ -258,7 +258,7 @@ function renderPetResults(result) {
         <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
         <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i> ${result.contact.city.$t}, 
         ${result.contact.state.$t}<br>
-        Contact: <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
+        <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
         </p>
         <div class="js-image-block">
         <div class="hero">
@@ -277,7 +277,7 @@ function displayImages(images) {
     if(!images || !images.media.photos) {
         return `<figure>
         <img src="images/zoe_no_image.jpg" alt="no image available" />
-        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe</a> </figcaption>
+        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
         </figure>`
     };
     let photoSrc = images.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
@@ -336,7 +336,7 @@ function renderShelterList(result) {
     return `
     <div class="result-shelter">
         <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i> ${result.city.$t}, ${result.state.$t}  <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> ${result.city.$t}, ${result.state.$t} <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber} <i class="fa fa-envelope" aria-hidden="true"></i> ${email}</p>
     </div>
     `;
 };

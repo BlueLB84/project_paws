@@ -21,16 +21,21 @@
         
         <section class="dog-search">
             <form action="#" class="js-search-form search_form">
-                <label for="search_form--location" required>*Location</label>
+                <div class="search_form--label">
+                    <label for="search_form--location" required>*Location</label>
                     <input placeholder="city, state" type="text" name="location" id="search_form--location" class="js-search-location" size="35" required/>
-                        <fieldset name="filter" class="filters">
+                </div>        
+                    <fieldset name="filter" class="filters">
                             <legend>Doggy Details</legend>
                             <section class="filters__breed">
-                                <label for="filters__breed--1">Breed</label>
-                                <input placeholder="dog breed" type="text" name="breed1" id="filters__breed--1" />
-
-                                <label for="filters__breed--2">Breed</label>
-                                <input placeholder="dog breed" type="text" name="breed2" id="filters__breed--2" />
+                                <div>
+                                    <label for="filters__breed--1">Breed</label>
+                                    <input placeholder="dog breed" type="text" name="breed1" id="filters__breed--1" />
+                                </div>
+                                <div>
+                                    <label for="filters__breed--2">Breed</label>
+                                    <input placeholder="dog breed" type="text" name="breed2" id="filters__breed--2" />
+                                </div>        
                             </section>
                             
                             <section class="filters__sexAgeSize">
@@ -60,10 +65,12 @@
                                 </select>
                             </section>    
                     </fieldset>
-                    <button type="submit" class="js-button--dogs">Find Dogs</button>
-                    <button type="submit" class="js-button--random">Meet a Random Dog</button>
-                    <button type="reset" class="js-button--reset">Reset Doggy Details</button>
-            </form>
+                    <div class="search-buttons">
+                        <button type="submit" class="js-button--dogs">Find Dogs</button>
+                        <button type="submit" class="js-button--random">Meet a Random Dog</button>
+                        <button type="reset" class="js-button--reset">Reset Doggy Details</button>
+                    </div>
+                </form>
         </section>
 
         <section class="js-search-form--shelter shelter-search">
@@ -79,7 +86,7 @@
         <section class="js-results results">
         </section>
 
-        <section class="js-results-shelters results">
+        <section class="js-results-shelters results-shelters">
                 
         </section>
 
