@@ -29,10 +29,31 @@ const STATE = {
     breed_data: null,
     breeds_arr: [],
     breeds_autocomplete: {list: {match: {enabled: true}}},
+    randomDogData: null,
     petfinder_search_url: 'https://api.petfinder.com/',
     method: null,
     breed_method: 'breed.list'
 };
+
+window.onpopstate = function(event) {
+    let change = false;
+    if(document.location.pathname === '/shelter-list' ) {
+        STATE.route = 'shelter-list';
+        change = true;
+    } else if(document.location.pathname === '/' || document.location.pathname === '/index.html') {
+        STATE.route = 'start';
+        change = true;
+    } else if(document.location.pathname === `/shelter-list/${STATE.queryShelterAnimals.id}`) {
+        STATE.route = 'shelter-animals';
+        change = true;
+    } else if(document.location.pathname === `/${STATE.randomDogData.petfinder.pet.name.$t}-${STATE.randomDogData.petfinder.pet.id.$t}`) {
+        STATE.route = 'single-animal';
+        change = true;
+    }
+    if(change === true) {
+        renderProjectPaws(STATE.route, PAGE_VIEWS);
+    };
+  };
 
 const PAGE_VIEWS = {
     'start': $('.js-start'),
@@ -122,6 +143,7 @@ function handleFindShelterSubmit() {
         STATE.queryShelter.location = $('#search_form--shelter-location').val();
         getShelterListFromAPI(STATE.method, displayShelterList);
         $('#search_form--shelter-location').val('');
+        history.pushState({},'shelter-list','shelter-list');
         handleQueryShelterReset();
     })
 };
@@ -134,6 +156,7 @@ function handlePetFindSubmit(event) {
         filterPetFindSubmit(event);
         getDataFromAPI(STATE.method, displayPetfinderData);
         $('#search_form--location').val('');
+        history.pushState({},'dog-search-results',`${STATE.query.location.split(', ').splice(0,2).join('-')}-search-results`);
         handleQueryReset();
     })
 };
@@ -204,19 +227,68 @@ function displayPetfinderData(data) {
     const results = data.petfinder.pets.pet.map((item, index) => {
         return renderPetResults(item);
     });
-    $('.js-results').html(results);
+    $('.js-results').html(`${results.join('')} <button class="js-return-home button-return">Return Home</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
 
 function displayRandomDogData(data) {
-    STATE.data = data;
+    STATE.randomDogData = data;
     STATE.route = 'single-animal';
     const results = renderPetResults(data.petfinder.pet);
-    $('.js-results-single').html(results);
+    history.pushState({},'random-dog',`/${STATE.randomDogData.petfinder.pet.name.$t}-${STATE.randomDogData.petfinder.pet.id.$t}`);
+    $('.js-results-single').html(`${results} <button class="js-return-home button-return">Return Home</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
 
+function filterGenderResults(result) {
+    if(result.sex.$t === 'F') {
+        return 'Female';
+    } else if(result.sex.$t === 'M') {
+        return 'Male';
+    }
+};
+
+function filterBreedResults(result) {
+    if(Array.isArray(result.breeds.breed)) {
+        return `${result.breeds.breed[0].$t} & ${result.breeds.breed[1].$t}`;
+    } else {
+        return `${result.breeds.breed.$t}`;
+    }
+};
+
+function filterDescriptionResults(result) {
+    if(!('$t' in result.description)) {
+        return 'Description not available <i class="fa fa-paw" aria-hidden="true"></i>';
+    } else {
+        return `${result.description.$t}`;
+    }
+};
+
+function filterEmailResults(result) {
+    if(!result.contact.email || !('$t' in result.contact.email)) {
+        return 'Email Not Available';
+    } else {
+        return `${result.contact.email.$t}`;
+    }
+};
+
+function filterPhoneResults(result) {
+    if(!('$t' in result.contact.phone)) {
+        return 'Phone Number Not Available';
+    } else {
+        return `${result.contact.phone.$t}`;
+    }
+}
+
 function renderPetResults(result) {
+    const gender = filterGenderResults(result);
+    const breed = filterBreedResults(result);
+    const description = filterDescriptionResults(result);
+    const email = filterEmailResults(result);
+    const phone = filterPhoneResults(result);
+    const images = displayImages(result);
+    const thumbnailImgs = images.join(' ');
+    const heroImg = images[0];
     if (result === undefined) {
         return `<div class="result-dog">
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
@@ -225,65 +297,39 @@ function renderPetResults(result) {
         <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
         </figure>
         </div>`
-    }
-    let gender = '';
-    let breed = '';
-    const images = displayImages(result);
-    const thumbnailImgs = images.join(' ');
-    let heroImg = images[0];
-    if(result.sex.$t === 'F') {
-        gender = 'Female';
-    }
-    if(result.sex.$t === 'M') {
-        gender = 'Male';
-    }
-    if(Array.isArray(result.breeds.breed)) {
-        breed = `${result.breeds.breed[0].$t} & ${result.breeds.breed[1].$t}`;
     } else {
-        breed = result.breeds.breed.$t;
-    }
-    if (!('$t' in result.contact.phone)) {
-        phoneNumber = 'Phone Number Not Available';
-    } else {
-        phoneNumber = result.contact.phone.$t;
-    }
-    if (!result.contact.email || !('$t' in result.contact.email)) {
-        email = 'Email Not Available';
-    } else {
-        email = result.contact.email.$t
-    }
-    
-    return `
-    <div class="result-dog">
-        <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
-        <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i> ${result.contact.city.$t}, 
-        ${result.contact.state.$t}<br>
-        <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
-        </p>
-        <div class="js-image-block">
-        <div class="hero">
-        ${heroImg}
+        return `
+        <div class="result-dog">
+            <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
+            <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i> ${result.contact.city.$t}, 
+            ${result.contact.state.$t}<br>
+            <i class="fa fa-phone" aria-hidden="true"></i> ${phone}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
+            </p>
+            <div class="js-image-block">
+            <div class="hero">
+            ${heroImg}
+            </div>
+            <div class="thumbnails">
+            ${thumbnailImgs}
+            </div>
+            </div>
+            <p>${description}</p>
         </div>
-        <div class="thumbnails">
-        ${thumbnailImgs}
-        </div>
-        </div>
-        <p>${result.description.$t}</p>
-    </div>
-    `;
+        `;
+    }
 }
 
-function displayImages(images) {
-    if(!images || !images.media.photos) {
+function displayImages(result) {
+    if(!result.media || !result.media.photos) {
         return `<figure>
         <img src="images/zoe_no_image.jpg" alt="no image available" />
         <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
         </figure>`
-    };
-    let photoSrc = images.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
-        return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t} alt="${images.name.$t}" index="${index}"/></a>`;
-    });
-    return photoSrc;
+    } else {
+        return result.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
+            return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t} alt="${result.name.$t}" index="${index}"/></a>`;
+        });
+    }
 }
 
 function handleThumbnailClicks() {
@@ -293,6 +339,12 @@ function handleThumbnailClicks() {
         $(event.currentTarget).closest('.js-image-block').find('.hero img').attr('src', imgSrc).attr('alt', imgAlt);
     });
 }
+
+$('.js-results-single, .js-results').on('click', '.js-return-home', event => {
+    STATE.route = 'start';
+    history.replaceState({},'home','/index.html');
+    renderProjectPaws(STATE.route, PAGE_VIEWS);
+});
 
 function displayShelterList(data) {
     STATE.shelterListData = data;
@@ -345,11 +397,13 @@ $('.js-results-shelters').on('click', 'h3', event => {
     let shelterName = $(event.currentTarget).text().split(' ').join('');
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
+    history.pushState({},'shelter-name',`shelter-list/${STATE.queryShelterAnimals.id}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
 });
 
 $('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
     STATE.route = 'shelter-list';
+    history.back();
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 });
 
