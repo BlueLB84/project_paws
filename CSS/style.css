@@ -3,24 +3,18 @@
     margin: 0;
     padding: 0;
     font-size: 100%;
+    font-family: 'Poppins', sans-serif;
 }
-
-/* Layout Properties (position, float, clear, display)
-Box Model Properties (width, height, margin, padding)
-Visual Properties (color, background, border, box-shadow)
-Typography Properties (font-size, font-family, text-align, text-transform)
-Misc Properties (cursor, overflow, z-index) */
-
-/* LBV styling */
 
 body {
     position: relative;
 }
 
 h1 {
+    display: block;
+    width: 90%;
+    margin: 30px auto;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
     font-size: 4rem;
 }
 
@@ -30,6 +24,9 @@ main {
 	align-items: center;
     flex-direction: column;
     width: 100%;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 main h2 {
@@ -42,7 +39,14 @@ main h2 {
 .dog-search {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
+}
+
+.search_form {
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto;
 }
 
 .search_form--label {
@@ -61,12 +65,17 @@ main h2 {
 
 fieldset {
     width: 100%;
-    margin-top: 15px;
+    margin: 20px auto 10px auto;
     padding: 20px 10px;
 }
 
 fieldset legend {
+    padding: 5px;
     text-align: center;
+    font-size: 1.1rem;
+    background-color: #CCFF66;
+    color: #373F51;
+    border: 1px solid #373F51;
 }
 
 .filters__sexAgeSize {
@@ -77,22 +86,23 @@ fieldset legend {
 }
 .filters__sexAgeSize select {
     margin: 0px 15px 0px 5px;
+    border: 1px solid #CCFF66; 
 }
 
 .filters__breed {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    text-align: center;
 }
 
 .filters__breed div {
     display: inline-block;
-    flex: 1;
+}
+
+.filters__breed div label, .filters__sexAgeSize label {
+    margin-right: 5px;
 }
 
 .filters__breed div:first-child {
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .search-buttons {
@@ -108,10 +118,16 @@ main button, .button-return {
     border: 1px solid #373F51;
     border-radius: 2px;
     color: #373F51;
+    -webkit-transition: background-color .3s ease;
+    -moz-transition: background-color .3s ease;
+    -o-transition: background-color .3s ease;
+    transition: background-color .3s ease;
 }
 
 button:hover {
     cursor: pointer;
+    background-color: #FF3F10;
+    color: #FBFBFF;
 }
 
 footer {
@@ -134,6 +150,11 @@ footer i, a {
 }
 
 .shelter-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -201,7 +222,7 @@ footer i, a {
     width: 100%;
     border: 1px solid black;
     border-radius: 4px;
-    box-shadow: 1px 1px 2px #373F51;
+    box-shadow: 2px 2px 3px #373F51;
 }
 
 .result-dog h3, .result-shelter h3 {
@@ -218,8 +239,10 @@ footer i, a {
 .result-dog p:last-child {
     text-align: left;
     width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    max-height: 200px;
+    overflow-x: scroll;
+    margin: 10px auto;
+    padding: 10px;
 }
 
 .hero {
@@ -251,4 +274,44 @@ footer i, a {
 
   .instagram {
       color: #4ECDC4;
+  }
+
+  @media screen and (max-width: 678px) {
+    h1 {
+        font-size: 3rem;
+    }
+    .filters__breed div:first-child {
+        margin-right: 0px;
+    }
+    .filters__sexAgeSize {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .search-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .shelter-search form {
+        display: block;
+        text-align: center;
+    }
+    
+    .shelter-search button {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    footer {
+        /* flex-direction: row;
+        justify-content: space-between; */
+        height: 35px;
+        font-size: 12px;
+    }
+    footer span {
+        display: none;
+    }
   }
