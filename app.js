@@ -40,7 +40,7 @@ window.onpopstate = function(event) {
     if(document.location.pathname === '/shelter-list' ) {
         STATE.route = 'shelter-list';
         change = true;
-    } else if(document.location.pathname === '/' || document.location.pathname === '/index.html') {
+    } else if(document.location.pathname === '/' || document.location.pathname === '/index.html' || document.location.pathname === '/project_paws') {
         STATE.route = 'start';
         change = true;
     } else if(document.location.pathname === `/shelter-list/${STATE.queryShelterAnimals.id}`) {
@@ -342,7 +342,7 @@ function handleThumbnailClicks() {
 
 $('.js-results-single, .js-results').on('click', '.js-return-home', event => {
     STATE.route = 'start';
-    history.replaceState({},'home','/index.html');
+    history.replaceState({},'home','/project_paws');
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 });
 
