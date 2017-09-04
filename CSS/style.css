@@ -6,6 +6,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.fa {display: inline;}
+
 body {
     position: relative;
     width: 100%;
