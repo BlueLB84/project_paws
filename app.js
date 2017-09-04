@@ -294,16 +294,16 @@ function renderPetResults(result) {
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
         <figure>
         <img src="images/chief_sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
-        <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
+        <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
         </figure>
         </div>`
     } else {
         return `
         <div class="result-dog">
             <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
-            <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i> ${result.contact.city.$t}, 
+            <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${result.contact.city.$t}, 
             ${result.contact.state.$t}<br>
-            <i class="fa fa-phone" aria-hidden="true"></i> ${phone}  <i class="fa fa-envelope" aria-hidden="true"></i> ${email}
+            <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phone}  <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}
             </p>
             <div class="js-image-block">
             <div class="hero">
@@ -323,7 +323,7 @@ function displayImages(result) {
     if(!result.media || !result.media.photos) {
         return `<figure>
         <img src="images/zoe_no_image.jpg" alt="no image available" />
-        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
+        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
         </figure>`
     } else {
         return result.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
@@ -388,7 +388,7 @@ function renderShelterList(result) {
     return `
     <div class="result-shelter">
         <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i> ${result.city.$t}, ${result.state.$t} <i class="fa fa-phone" aria-hidden="true"></i> ${phoneNumber} <i class="fa fa-envelope" aria-hidden="true"></i> ${email}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${result.city.$t}, ${result.state.$t} <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phoneNumber} <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}</p>
     </div>
     `;
 };

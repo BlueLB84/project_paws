@@ -253,7 +253,7 @@ footer i, a {
   }
   
   .hero img {
-    height: 100%
+    height: 100%;
   }
   
   .thumbnails {
@@ -316,8 +316,9 @@ footer i, a {
         margin-right: auto;
         margin-left: auto;
     }
-    
-
+    .hero img {
+        max-width: 300px;
+    }
     footer {
         /* flex-direction: row;
         justify-content: space-between; */
