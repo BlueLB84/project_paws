@@ -14,24 +14,10 @@
         <h1>Project Paws</h1>
     </header>
     
-    <div class="js-start-modal--container start-modal--container">
-        <div class="js-start-modal start-modal">
-                <h2>Welcome to Project Paws!</h2>
-                <p>You can search for local shelters and shelter animals, search dogs across the US, and meet a random doggy friend!</p>
-                <button class="js-button--start">Start Your Search!</button>        
-        </div> 
-    </div>   
-    
+    <div class="js-start"></div>
     
     <main role="main" class="js-search search">
         <h2>Find A Doggy Friend!</h2>
-        <section class="js-search-form--shelter shelter-search">
-            <form action="#" class="js-search-form-shelter search_form">
-                <label for="search_form--location" required>*Location</label>
-                    <input placeholder="city, state" type="text" name="location" id="search_form--shelter-location" class="js-search-location" size="35" required/>
-                <button type="submit" class="js-button--shelters">Find a Shelter</button>
-            </form>
-        </section>
         
         <section class="dog-search">
             <form action="#" class="js-search-form search_form">
@@ -78,6 +64,15 @@
                     <button type="submit" class="js-button--random">Meet a Random Dog</button>
                     <button type="reset" class="js-button--reset">Reset Doggy Details</button>
             </form>
+        </section>
+
+        <section class="js-search-form--shelter shelter-search">
+                <h2>Search local shelters for an animal friend!</h2>
+            <form action="#" class="js-search-form-shelter search_form">
+                    <label for="search_form--location" required>*Location</label>
+                        <input placeholder="city, state" type="text" name="location" id="search_form--shelter-location" class="js-search-location" size="35" required/>
+                    <button type="submit" class="js-button--shelters">Find a Shelter</button>
+                </form>
         </section>
     </main>
     <div class="results-area">

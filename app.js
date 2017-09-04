@@ -35,7 +35,7 @@ const STATE = {
 };
 
 const PAGE_VIEWS = {
-    'start': $('.js-start-modal-container'),
+    'start': $('.js-start'),
     'dog-results': $('.js-results'),
     'shelter-list': $('.js-results-shelters'),
     'shelter-animals': $('.js-results-shelter-animals'),
@@ -49,10 +49,6 @@ function renderProjectPaws(currentRoute, elements) {
     elements[currentRoute].show();
 }
  
-$('.js-button--start').click(event => {
-    $('.js-start-modal--container').hide();
-});
-
 
 // GOOGLE MAPS AUTOCOMPLETE 
 function autocompleteLocations() {
@@ -125,6 +121,7 @@ function handleFindShelterSubmit() {
         STATE.method = 'shelter.find';
         STATE.queryShelter.location = $('#search_form--shelter-location').val();
         getShelterListFromAPI(STATE.method, displayShelterList);
+        $('#search_form--shelter-location').val('');
         handleQueryShelterReset();
     })
 };
@@ -136,6 +133,7 @@ function handlePetFindSubmit(event) {
         STATE.query.location = $('#search_form--location').val();
         filterPetFindSubmit(event);
         getDataFromAPI(STATE.method, displayPetfinderData);
+        $('#search_form--location').val('');
         handleQueryReset();
     })
 };
@@ -201,7 +199,6 @@ function filterPetFindSubmit(event) {
 };
 
 function displayPetfinderData(data) {
-    console.log(data);
     STATE.data = data;
     STATE.route = 'dog-results';
     const results = data.petfinder.pets.pet.map((item, index) => {
@@ -231,7 +228,8 @@ function renderPetResults(result) {
     }
     let gender = '';
     let breed = '';
-    let images = displayImages(result);
+    const images = displayImages(result);
+    const thumbnailImgs = images.join(' ');
     let heroImg = images[0];
     if(result.sex.$t === 'F') {
         gender = 'Female';
@@ -267,7 +265,7 @@ function renderPetResults(result) {
         ${heroImg}
         </div>
         <div class="thumbnails">
-        ${images.join(' ')}
+        ${thumbnailImgs}
         </div>
         </div>
         <p>${result.description.$t}</p>
@@ -361,5 +359,5 @@ $(document).ready(function() {
     handlePetFindSubmit();
     handleFindShelterSubmit();
     handleRandomDogSubmit();
-    handleThumbnailClicks()
+    handleThumbnailClicks();
 });
