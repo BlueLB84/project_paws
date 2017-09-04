@@ -8,11 +8,12 @@
 
 body {
     position: relative;
+    width: 100%;
 }
 
 h1 {
     display: block;
-    width: 90%;
+    width: 100%;
     margin: 30px auto;
     text-align: center;
     font-size: 4rem;
@@ -280,6 +281,16 @@ footer i, a {
     h1 {
         font-size: 3rem;
     }
+    
+    .search_form--label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    .search_form--label label, .shelter-search label {
+        font-size: 1.2rem;
+    }
     .filters__breed div:first-child {
         margin-right: 0px;
     }
@@ -305,6 +316,8 @@ footer i, a {
         margin-right: auto;
         margin-left: auto;
     }
+    
+
     footer {
         /* flex-direction: row;
         justify-content: space-between; */
