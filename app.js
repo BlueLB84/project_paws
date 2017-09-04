@@ -303,7 +303,7 @@ function renderPetResults(result) {
             <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
             <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${result.contact.city.$t}, 
             ${result.contact.state.$t}<br>
-            <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phone}  <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}
+            <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phone} <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}
             </p>
             <div class="js-image-block">
             <div class="hero">
