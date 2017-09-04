@@ -247,7 +247,7 @@ function renderPetResults(result) {
     } else {
         phoneNumber = result.contact.phone.$t;
     }
-    if (!result.contact.email) {
+    if (!result.contact.email || !('$t' in result.contact.email)) {
         email = 'Email Not Available';
     } else {
         email = result.contact.email.$t

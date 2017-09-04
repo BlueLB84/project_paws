@@ -195,15 +195,17 @@ footer i, a {
 
 .result-dog {
     text-align: center;
+    line-height: 1.5rem;
     margin: 10px auto 25px auto;
     padding: 10px;
     width: 100%;
     border: 1px solid black;
     border-radius: 4px;
+    box-shadow: 1px 1px 2px #373F51;
 }
 
-.result-dog h3 {
-    font-size: 1.2rem;
+.result-dog h3, .result-shelter h3 {
+    font-size: 1.5rem;
     padding-bottom: 2px;
 }
 
@@ -215,6 +217,9 @@ footer i, a {
 
 .result-dog p:last-child {
     text-align: left;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .hero {
@@ -234,12 +239,14 @@ footer i, a {
     height: 100px;
   }
   
-  a.thumbnail:hover {
-    box-shadow: 1px 1px 1px gray;
+  .thumbnail img:hover {
+    box-shadow: 1px 1px 2px #FF3F10;
   }
   
   .thumbnail img {
     max-height: 100%;
+    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .instagram {
