@@ -111,7 +111,7 @@ fieldset legend {
 .search-buttons {
     display: flex;
     justify-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 main button, .button-return {
@@ -221,7 +221,7 @@ footer i, a {
     text-align: center;
     line-height: 1.5rem;
     margin: 10px auto 25px auto;
-    padding: 10px;
+    padding: 20px 10px;
     width: 100%;
     border: 1px solid black;
     border-radius: 4px;
@@ -247,11 +247,15 @@ footer i, a {
     margin: 10px auto;
     padding: 10px;
 }
-
+.js-image-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .hero {
     height: 300px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin: 10px auto 20px auto;    
   }
   
   .hero img {
@@ -293,9 +297,7 @@ footer i, a {
     .search_form--label label, .shelter-search label {
         font-size: 1.2rem;
     }
-    .filters__breed div:first-child {
-        margin-right: 0px;
-    }
+    
     .filters__sexAgeSize {
         display: flex;
         justify-content: center;
@@ -318,12 +320,12 @@ footer i, a {
         margin-right: auto;
         margin-left: auto;
     }
+    
     .hero img {
-        max-width: 300px;
+        width: 100%;
+        margin: 10px auto;
     }
     footer {
-        /* flex-direction: row;
-        justify-content: space-between; */
         height: 35px;
         font-size: 12px;
     }
@@ -331,3 +333,10 @@ footer i, a {
         display: none;
     }
   }
+
+@media screen and (max-width: 528px) {
+    .filters__breed div:first-child {
+        margin-right: 0px;
+    }
+}
+  
