@@ -418,4 +418,6 @@ $(document).ready(function() {
     handleFindShelterSubmit();
     handleRandomDogSubmit();
     handleThumbnailClicks();
+    renderPetResults();
+    displayImages();
 });
