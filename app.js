@@ -298,7 +298,12 @@ function renderPetResults(result) {
         const email = filterEmailResults(result);
         const phone = filterPhoneResults(result);
         const images = displayImages(result);
-        const thumbnailImgs = images.join(' ');
+        let thumbnailImgs = null;
+        if(Array.isArray(images)) {
+            thumbnailImgs = images.join(' ');
+        } else {
+            thumbnailImgs = images;
+        };
         const heroImg = images[0];
         return `
         <div class="result-dog">
