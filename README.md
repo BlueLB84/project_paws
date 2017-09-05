@@ -1,4 +1,4 @@
-# Project Paws by [@BlueLB84](https://https://github.com/BlueLB84 "BlueLB84 on GitHub") #
+# Project Paws by [@BlueLB84](https://github.com/BlueLB84 "BlueLB84 on GitHub") #
 
 Checkout this project on [GitHub Pages!](https://bluelb84.github.io/project_paws/ "Project Paws")
 
