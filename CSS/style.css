@@ -249,12 +249,8 @@ footer i, a {
 }
 .js-image-block {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 }
 .hero {
-    height: 300px;
     margin: 10px auto 20px auto;    
   }
   
@@ -322,7 +318,6 @@ footer i, a {
     }
     
     .hero img {
-        width: 100%;
         margin: 10px auto;
     }
     footer {

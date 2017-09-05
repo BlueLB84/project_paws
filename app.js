@@ -145,6 +145,7 @@ function handleFindShelterSubmit() {
         $('#search_form--shelter-location').val('');
         history.pushState({},'shelter-list','shelter-list');
         handleQueryShelterReset();
+        $($('html, body')).animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
     })
 };
 
@@ -158,6 +159,7 @@ function handlePetFindSubmit(event) {
         $('#search_form--location').val('');
         history.pushState({},'dog-search-results',`${STATE.query.location.split(', ').splice(0,2).join('-')}-search-results`);
         handleQueryReset();
+        $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
     })
 };
 
@@ -180,6 +182,7 @@ function handleRandomDogSubmit() {
             getDataFromAPI(STATE.method, displayRandomDogData);
         }
         handleQueryReset();
+        $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
     })
 };
 
@@ -399,6 +402,7 @@ $('.js-results-shelters').on('click', 'h3', event => {
     STATE.method = 'shelter.getPets';
     history.pushState({},'shelter-name',`shelter-list/${STATE.queryShelterAnimals.id}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
+    $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
 });
 
 $('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
