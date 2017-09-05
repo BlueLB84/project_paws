@@ -26,6 +26,8 @@ See more Project Paws [information and images](https://github.com/BlueLB84/proje
 
 ![Project Paws Desktop Result Example](/images/result-example.png "Project Paws Result Example Desktop")
 
+* * *
+
 ### Mobile View Examples ###
 ![Project Paws Mobile Start Screen](/images/mobile-start.PNG "Project Paws Mobile Start Screen")
 
