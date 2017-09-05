@@ -288,7 +288,7 @@ function renderPetResults(result) {
         return `<div class="result-dog">
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
         <figure>
-        <img src="images/chief_sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
+        <img src="images/chief_sleeping.JPG" alt="Chief sleeping from Instagram @chiefandzoe" />
         <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
         </figure>
         </div>`
