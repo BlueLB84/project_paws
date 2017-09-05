@@ -287,7 +287,7 @@ function renderPetResults(result) {
         return `<div class="result-dog">
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
         <figure>
-        <img src="../chief-sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
+        <img src="../images/chief-sleeping.jpg" alt="Chief sleeping from Instagram @chiefandzoe" />
         <figcaption>A sleeping Chief. <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram"> @chiefandzoe</a></figcaption>
         </figure>
         </div>`
@@ -324,7 +324,7 @@ function renderPetResults(result) {
 function displayImages(result) {
     if(!result.media || !result.media.photos) {
         return `<figure>
-        <img src="../zoe-no-image.jpg" alt="no image available" />
+        <img src="../images/zoe-no-image.jpg" alt="no image available" />
         <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
         </figure>`
     } else {
