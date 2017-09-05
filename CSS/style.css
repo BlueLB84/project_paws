@@ -127,12 +127,6 @@ main button, .button-return {
     transition: background-color .3s ease;
 }
 
-button:hover {
-    cursor: pointer;
-    background-color: #FF3F10;
-    color: #FBFBFF;
-}
-
 footer {
     position: fixed;
     bottom: 0;
@@ -279,6 +273,14 @@ footer i, a {
       color: #4ECDC4;
   }
 
+  @media screen and (min-width: 679px) {
+    button:hover {
+        cursor: pointer;
+        background-color: #FF3F10;
+        color: #FBFBFF;
+    }
+  }
+  
   @media screen and (max-width: 678px) {
     h1 {
         font-size: 3rem;
