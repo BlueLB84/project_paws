@@ -284,14 +284,6 @@ function filterPhoneResults(result) {
 }
 
 function renderPetResults(result) {
-    const gender = filterGenderResults(result);
-    const breed = filterBreedResults(result);
-    const description = filterDescriptionResults(result);
-    const email = filterEmailResults(result);
-    const phone = filterPhoneResults(result);
-    const images = displayImages(result);
-    const thumbnailImgs = images.join(' ');
-    const heroImg = images[0];
     if (result === undefined) {
         return `<div class="result-dog">
         <h2>Sorry! There are no results <i class="fa fa-paw" aria-hidden="true"></i></h2>
@@ -301,6 +293,14 @@ function renderPetResults(result) {
         </figure>
         </div>`
     } else {
+        const gender = filterGenderResults(result);
+        const breed = filterBreedResults(result);
+        const description = filterDescriptionResults(result);
+        const email = filterEmailResults(result);
+        const phone = filterPhoneResults(result);
+        const images = displayImages(result);
+        const thumbnailImgs = images.join(' ');
+        const heroImg = images[0];
         return `
         <div class="result-dog">
             <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
