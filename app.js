@@ -70,7 +70,6 @@ function renderProjectPaws(currentRoute, elements) {
     elements[currentRoute].show();
 }
  
-
 // GOOGLE MAPS AUTOCOMPLETE 
 function autocompleteLocations() {
     let input = document.getElementById('search_form--shelter-location');
@@ -91,7 +90,7 @@ function getBreedsFromAPI(callback) {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
         animal: 'dog',
         format: 'json' 
-    }
+    };
     const apiURL = STATE.petfinder_search_url + STATE.breed_method + "?callback=?";
     $.getJSON(apiURL, query, callback);
 };
@@ -109,9 +108,9 @@ function buildBreedsArr() {
     const breedsArr = [];
     results.map(function(item){
         return breedsArr.push(item.$t);
-    })
+    });
     return breedsArr;
-}
+};
 
 function getDataFromAPI(method, callback) {
     const breedParams = joinBreeds();
@@ -146,7 +145,7 @@ function handleFindShelterSubmit() {
         history.pushState({},'shelter-list','shelter-list');
         handleQueryShelterReset();
         $($('html, body')).animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
-    })
+    });
 };
 
 function handlePetFindSubmit(event) {
@@ -160,7 +159,7 @@ function handlePetFindSubmit(event) {
         history.pushState({},'dog-search-results',`${STATE.query.location.split(', ').splice(0,2).join('-')}-search-results`);
         handleQueryReset();
         $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
-    })
+    });
 };
 
 function handleRandomDogSubmit() {
@@ -183,7 +182,7 @@ function handleRandomDogSubmit() {
         }
         handleQueryReset();
         $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
-    })
+    });
 };
 
 $('.js-search-form').on('click', '.js-button--reset', event => {
@@ -202,7 +201,7 @@ function handleQueryReset() {
         size: null,
         age: null,
         breed: [null,null] 
-    }
+    };
 };
 
 function handleQueryShelterReset() {
@@ -210,7 +209,7 @@ function handleQueryShelterReset() {
         key: 'ba13b6abb4f8162d2d70780f5d2a8d35',
         format: 'json',
         location: null
-    }
+    };
 };
 
 function filterPetFindSubmit(event) {
@@ -248,7 +247,7 @@ function filterGenderResults(result) {
         return 'Female';
     } else if(result.sex.$t === 'M') {
         return 'Male';
-    }
+    };
 };
 
 function filterBreedResults(result) {
@@ -256,7 +255,7 @@ function filterBreedResults(result) {
         return `${result.breeds.breed[0].$t} & ${result.breeds.breed[1].$t}`;
     } else {
         return `${result.breeds.breed.$t}`;
-    }
+    };
 };
 
 function filterDescriptionResults(result) {
@@ -264,7 +263,7 @@ function filterDescriptionResults(result) {
         return 'Description not available <i class="fa fa-paw" aria-hidden="true"></i>';
     } else {
         return `${result.description.$t}`;
-    }
+    };
 };
 
 function filterEmailResults(result) {
@@ -272,7 +271,7 @@ function filterEmailResults(result) {
         return 'Email Not Available';
     } else {
         return `${result.contact.email.$t}`;
-    }
+    };
 };
 
 function filterPhoneResults(result) {
@@ -280,8 +279,8 @@ function filterPhoneResults(result) {
         return 'Phone Number Not Available';
     } else {
         return `${result.contact.phone.$t}`;
-    }
-}
+    };
+};
 
 function renderPetResults(result) {
     if (result === undefined) {
@@ -319,8 +318,8 @@ function renderPetResults(result) {
             <p>${description}</p>
         </div>
         `;
-    }
-}
+    };
+};
 
 function displayImages(result) {
     if(!result.media || !result.media.photos) {
@@ -332,8 +331,8 @@ function displayImages(result) {
         return result.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
             return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t} alt="${result.name.$t}" index="${index}"/></a>`;
         });
-    }
-}
+    };
+};
 
 function handleThumbnailClicks() {
     $('.js-results, .js-results-shelter-animals, .js-results-single').on('click', '.thumbnail', function(event) {
@@ -341,7 +340,7 @@ function handleThumbnailClicks() {
         const imgAlt = $(event.currentTarget).find('img').attr('alt');
         $(event.currentTarget).closest('.js-image-block').find('.hero img').attr('src', imgSrc).attr('alt', imgAlt);
     });
-}
+};
 
 $('.js-results-single, .js-results').on('click', '.js-return-home', event => {
     STATE.route = 'start';
@@ -371,7 +370,7 @@ function displayShelterData(data) {
         });
     } else {
         results = [renderPetResults(pets)];
-    }
+    };
     $('.js-results-shelter-animals').html(`${results.join('')} <button class="js-return-shelter-list button-return">Return to Shelter Result List</button>`);
     renderProjectPaws(STATE.route, PAGE_VIEWS);
 };
@@ -383,12 +382,12 @@ function renderShelterList(result) {
         phoneNumber = 'Phone Number Not Available';
     } else {
         phoneNumber = result.phone.$t;
-    }
+    };
     if (!result.email || !('$t' in result.email)) {
         email = 'Email Not Available';
     } else {
         email = result.email.$t
-    }
+    };
     return `
     <div class="result-shelter">
         <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>

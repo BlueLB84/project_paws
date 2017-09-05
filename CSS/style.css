@@ -6,7 +6,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.fa {display: inline;}
+.fa {
+    display: inline;
+}
 
 body {
     position: relative;
@@ -87,6 +89,7 @@ fieldset legend {
     align-items: center;
     margin-top: 10px;
 }
+
 .filters__sexAgeSize select {
     margin: 0px 15px 0px 5px;
     border: 1px solid #CCFF66; 
@@ -241,47 +244,49 @@ footer i, a {
     margin: 10px auto;
     padding: 10px;
 }
+
 .js-image-block {
     width: 100%;
 }
+
 .hero {
     margin: 10px auto 20px auto;    
-  }
+}
   
-  .hero img {
+.hero img {
     height: 100%;
-  }
+}
   
-  .thumbnails {
+.thumbnails {
     display: inline-block;
     margin-bottom: 15px;
     cursor: pointer;
     height: 100px;
-  }
+}
   
-  .thumbnail img:hover {
+.thumbnail img:hover {
     box-shadow: 1px 1px 2px #FF3F10;
-  }
+}
   
-  .thumbnail img {
+.thumbnail img {
     max-height: 100%;
     margin-right: 5px;
     margin-left: 5px;
-  }
+}
 
-  .instagram {
+.instagram {
       color: #4ECDC4;
-  }
+}
 
-  @media screen and (min-width: 679px) {
+@media screen and (min-width: 679px) {
     button:hover {
         cursor: pointer;
         background-color: #FF3F10;
         color: #FBFBFF;
     }
-  }
+}
   
-  @media screen and (max-width: 678px) {
+@media screen and (max-width: 678px) {
     h1 {
         font-size: 3rem;
     }
@@ -292,6 +297,7 @@ footer i, a {
         justify-content: center;
         margin-top: 15px;
     }
+    
     .search_form--label label, .shelter-search label {
         font-size: 1.2rem;
     }
@@ -301,6 +307,7 @@ footer i, a {
         justify-content: center;
         flex-direction: column;
     }
+    
     .search-buttons {
         display: flex;
         flex-direction: column;
@@ -308,6 +315,7 @@ footer i, a {
         margin-right: auto;
         margin-left: auto;
     }
+    
     .shelter-search form {
         display: block;
         text-align: center;
@@ -322,14 +330,16 @@ footer i, a {
     .hero img {
         margin: 10px auto;
     }
+    
     footer {
         height: 35px;
         font-size: 12px;
     }
+    
     footer span {
         display: none;
     }
-  }
+}
 
 @media screen and (max-width: 528px) {
     .filters__breed div:first-child {
