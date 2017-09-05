@@ -347,6 +347,7 @@ $('.js-results-single, .js-results').on('click', '.js-return-home', event => {
     STATE.route = 'start';
     history.replaceState({},'home','/project_paws');
     renderProjectPaws(STATE.route, PAGE_VIEWS);
+    $('html, body').animate({scrollTop: $('body').offset().top -20 }, 'slow');
 });
 
 function displayShelterList(data) {
