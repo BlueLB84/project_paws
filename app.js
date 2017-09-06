@@ -156,7 +156,7 @@ function handlePetFindSubmit(event) {
         filterPetFindSubmit(event);
         getDataFromAPI(STATE.method, displayPetfinderData);
         $('#search_form--location').val('');
-        history.pushState({},'dog-search-results',`${STATE.query.location.split(', ').splice(0,2).join('-')}-search-results`);
+        history.pushState({},'dog-search-results',`/${STATE.query.location.split(', ').splice(0,2).join('-')}-search-results`);
         handleQueryReset();
         $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
     });
