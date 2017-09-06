@@ -40,7 +40,7 @@ window.onpopstate = function(event) {
     if(document.location.pathname === '/shelter-list' ) {
         STATE.route = 'shelter-list';
         change = true;
-    } else if(document.location.pathname === '/' || document.location.pathname === '/index.html' || document.location.pathname === '/project_paws') {
+    } else if(document.location.pathname === '/' || document.location.pathname === '/index.html' || document.location.pathname === '/project_paws/') {
         STATE.route = 'start';
         change = true;
     } else if(document.location.pathname === `/shelter-list/${STATE.queryShelterAnimals.id}`) {
