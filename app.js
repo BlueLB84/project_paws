@@ -395,7 +395,7 @@ function renderShelterList(result) {
     };
     return `
     <div class="result-shelter">
-        <h3 id="${result.id.$t}" class="result-shelter-name">${result.name.$t}</h3>
+        <h3 id="${result.id.$t}" class="result-shelter-name" tabindex="0">${result.name.$t}</h3>
         <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${result.city.$t}, ${result.state.$t} <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phoneNumber} <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}</p>
     </div>
     `;
