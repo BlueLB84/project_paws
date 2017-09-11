@@ -214,6 +214,10 @@ footer i, a {
     color: #FF3F10;
 }
 
+.result-shelter-name-focus {        
+    color: #FF3F10;
+}
+
 .result-dog {
     text-align: center;
     line-height: 1.5rem;
@@ -233,7 +237,7 @@ footer i, a {
 .result-dog i {
     margin-left: 8px;
     margin-right: 2px;
-    color: #4ECDC4;
+    color: #1F615A;
 }
 
 .result-dog p:last-child {
@@ -275,7 +279,7 @@ footer i, a {
 }
 
 .instagram {
-      color: #4ECDC4;
+      color: #1F615A;
 }
 
 @media screen and (min-width: 679px) {

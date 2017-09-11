@@ -327,6 +327,7 @@ function renderPetResults(result) {
 };
 
 function displayImages(result) {
+    console.log(result);
     if(!result.media || !result.media.photos) {
         return `<figure>
         <img src="../images/zoe-no-image.jpg" alt="no image available" />
@@ -334,7 +335,7 @@ function displayImages(result) {
         </figure>`
     } else {
         return result.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
-            return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t} alt="${result.name.$t}" index="${index}"/></a>`;
+            return `<a class="thumbnail" href="javascript:void(0);"><img src="${item.$t}" alt=${result.name.$t} index="${index}"/></a>`;
         });
     };
 };
@@ -401,13 +402,33 @@ function renderShelterList(result) {
     `;
 };
 
-$('.js-results-shelters').on('click', 'h3', event => {
+function handleShelterNameClick(event) {
     let shelterName = $(event.currentTarget).text().split(' ').join('');
     STATE.queryShelterAnimals.id = $(event.currentTarget).attr('id');
     STATE.method = 'shelter.getPets';
     history.pushState({},'shelter-name',`shelter-list/${STATE.queryShelterAnimals.id}`);
     getShelterDataFromAPI(STATE.method, displayShelterData);
     $('html, body').animate({scrollTop: $('#snap-to-results').offset().top -30 }, 'slow');
+}
+    $('.js-results-shelters').on('click', 'h3', event => {
+        handleShelterNameClick(event);
+    });
+
+
+$('.js-results-shelters').on('keydown', 'h3', event => {
+    if(event.which == 13) {
+        handleShelterNameClick(event);
+    }
+    if(event.which == 32) {
+        handleShelterNameClick(event);
+    }
+});
+
+$('.js-results-shelters').on('focus','.result-shelter-name', event => {
+    $(event.currentTarget).addClass('result-shelter-name-focus');
+    $(event.currentTarget).on('blur', event => {
+        $(event.currentTarget).removeClass('result-shelter-name-focus');
+    })
 });
 
 $('.js-results-shelter-animals').on('click', '.js-return-shelter-list', event => {
@@ -423,4 +444,5 @@ $(document).ready(function() {
     handleFindShelterSubmit();
     handleRandomDogSubmit();
     handleThumbnailClicks();
+    handleShelterNameClick();   
 });
