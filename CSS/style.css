@@ -315,8 +315,9 @@ footer a {
 @media screen and (max-width: 678px) {
     .topHome {
         background-image: url("../images/chief.jpg");
-        background-size: cover;
+        background-size: 100%;
         background-repeat: no-repeat;
+        background-position: top;
         padding: 10px;
         height: 100%;
     }
@@ -327,11 +328,11 @@ footer a {
     
     .result-dog {
         width: 100%;
-        overflow: scroll;
+        overflow-y: scroll;
     }
     
     .hero img {
-        width: 100%;
+        max-width: 300px;
     }
     .search_form--label {
         display: flex;
