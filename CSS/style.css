@@ -117,7 +117,7 @@ fieldset legend {
     justify-content: space-around;
 }
 
-main button, .button-return {
+main button, .button-return, .button-petfinder {
     margin-top: 10px;
     padding: 5px;
     background-color: #CCFF66;

@@ -306,7 +306,7 @@ function renderPetResults(result) {
         };
         return `
         <div class="result-dog">
-            <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
+            <h3 class="animal-name">${result.name.$t}</h3>
             <p>${gender} ${result.age.$t} ${breed} <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${result.contact.city.$t}, 
             ${result.contact.state.$t}<br>
             <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;${phone} <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;${email}
@@ -318,13 +318,13 @@ function renderPetResults(result) {
             ${thumbnailImgs}
             </div>
             <p>${description}</p>
+            <button class="js-petfinder-id button-petfinder" id="${result.id.$t}">See Me On Petfinder</button>
         </div>
         `;
     };
 };
 
 function displayImages(result) {
-    console.log(result);
     if(!result.media || !result.media.photos) {
         return `<figure>
         <img src="../images/zoe-no-image.jpg" alt="no image available" />
@@ -344,6 +344,13 @@ function handleThumbnailClicks() {
         $(event.currentTarget).closest('.js-image-block').find('.hero img').attr('src', imgSrc).attr('alt', imgAlt);
     });
 };
+
+$('.results-area').on('click', '.js-petfinder-id', event => {
+    event.preventDefault();
+    let petID = event.target.id;
+    console.log(petID);
+    window.open(`https://www.petfinder.com/petdetail/${petID}`, '_blank');
+});
 
 $('.js-results-single, .js-results').on('click', '.js-return-home', event => {
     STATE.route = 'start';
