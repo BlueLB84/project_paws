@@ -305,6 +305,14 @@ footer a {
         font-size: 3rem;
     }
     
+    .result-dog {
+        width: 100%;
+        overflow: scroll;
+    }
+    
+    .hero img {
+        width: 100%;
+    }
     .search_form--label {
         display: flex;
         flex-direction: column;
