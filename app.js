@@ -327,7 +327,7 @@ function renderPetResults(result) {
 function displayImages(result) {
     if(!result.media || !result.media.photos) {
         return `<figure>
-        <img src="/images/zoe-no-image.jpg" alt="no image available" />
+        <img src="project_paws/images/zoe.jpg" alt="no image available" />
         <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram">@chiefandzoe </a> </figcaption>
         </figure>`
     } else {
