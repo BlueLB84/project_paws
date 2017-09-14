@@ -20,18 +20,32 @@ h1 {
     width: 100%;
     margin: 30px auto;
     text-align: center;
-    font-size: 4rem;
+    font-size: 5rem;
+    color: #CCFF66;
+}
+
+.topHome {
+    background-image: url("../images/background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #373F51;
+    padding: 10px;
+    margin-bottom: -70px;
 }
 
 main {
     display: flex;
     justify-content: center;
-	align-items: center;
+    align-items: center;
     flex-direction: column;
+    text-align: center;
     width: 100%;
+    height: 100%;
     max-width: 1000px;
     margin-right: auto;
     margin-left: auto;
+    color: #6FF2E7;
 }
 
 main h2 {
@@ -133,7 +147,6 @@ main button, .button-return, .button-petfinder {
 footer {
     position: fixed;
     bottom: 0;
-    margin-top: 30px;
     z-index: 1;
     width: 100%;
     height: 60px;
@@ -156,7 +169,7 @@ footer a {
     flex-direction: column;
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .noEmail {
@@ -173,7 +186,6 @@ footer a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 25px;
     margin-bottom: 80px;
     width: 100%;
 }
@@ -301,6 +313,14 @@ footer a {
 }
   
 @media screen and (max-width: 678px) {
+    .topHome {
+        background-image: url("../images/chief.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 10px;
+        height: 100%;
+    }
+
     h1 {
         font-size: 3rem;
     }
@@ -357,6 +377,9 @@ footer a {
         height: 35px;
         font-size: 12px;
     }
+    .results-area {
+        margin-top: 80px;
+    }
     
     footer span {
         display: none;
@@ -366,6 +389,9 @@ footer a {
 @media screen and (max-width: 528px) {
     .filters__breed div:first-child {
         margin-right: 0px;
+    }
+    .topHome {
+        background-image: url("../images/chief.jpg");
     }
 }
   
