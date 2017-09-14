@@ -317,8 +317,8 @@ function renderPetResults(result) {
             </div>
             ${thumbnailImgs}
             </div>
-            <p>${description}</p>
             <button class="js-petfinder-id button-petfinder" id="${result.id.$t}">See Me On Petfinder</button>
+            <p>${description}</p>
         </div>
         `;
     };
