@@ -268,9 +268,9 @@ function filterDescriptionResults(result) {
 
 function filterEmailResults(result) {
     if(!result.contact.email || !('$t' in result.contact.email)) {
-        return 'Email Not Available';
+        return `<span class="noEmail">Email Not Available</span>`;
     } else {
-        return `${result.contact.email.$t}`;
+        return `<a href="mailto:${result.contact.email.$t}" class="email">${result.contact.email.$t}</a>`;
     };
 };
 
@@ -298,13 +298,12 @@ function renderPetResults(result) {
         const email = filterEmailResults(result);
         const phone = filterPhoneResults(result);
         const images = displayImages(result);
-        let thumbnailImgs = null;
-        if(Array.isArray(images)) {
-            thumbnailImgs = images.join(' ');
-        } else {
-            thumbnailImgs = images;
+        let thumbnailImgs = '';
+        let heroImg = images;
+        if(Array.isArray(images) && images.length > 1) {
+            thumbnailImgs = `<div class="thumbnails">${images.join(' ')}</div>`;
+            heroImg = images[0];
         };
-        const heroImg = images[0];
         return `
         <div class="result-dog">
             <h3 id="${result.id.$t}" class="animal-name">${result.name.$t}</h3>
@@ -316,9 +315,7 @@ function renderPetResults(result) {
             <div class="hero">
             ${heroImg}
             </div>
-            <div class="thumbnails">
             ${thumbnailImgs}
-            </div>
             </div>
             <p>${description}</p>
         </div>
@@ -330,8 +327,8 @@ function displayImages(result) {
     console.log(result);
     if(!result.media || !result.media.photos) {
         return `<figure>
-        <img src="../images/zoe-no-image.jpg" alt="no image available" />
-        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank">@chiefandzoe class="instagram"</a> </figcaption>
+        <img src="images/zoe-no-image.jpg" alt="no image available" />
+        <figcaption>Zoe <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;<a href="https://www.instagram.com/chiefandzoe/" target="_blank" class="instagram">@chiefandzoe </a> </figcaption>
         </figure>`
     } else {
         return result.media.photos.photo.filter(pic => pic['@size'] === 'pn').map((item, index) => {
@@ -390,9 +387,9 @@ function renderShelterList(result) {
         phoneNumber = result.phone.$t;
     };
     if (!result.email || !('$t' in result.email)) {
-        email = 'Email Not Available';
+        email = `<span class="noEmail">Email Not Available</span>`;
     } else {
-        email = result.email.$t
+        email = `<a href="mailto:${result.email.$t}" class="email">${result.email.$t}</a>`;
     };
     return `
     <div class="result-shelter">
