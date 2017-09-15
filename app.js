@@ -42,6 +42,7 @@ window.onpopstate = function(event) {
         change = true;
     } else if(document.location.pathname === '/project_paws/' || document.location.pathname === '/' || document.location.pathname === '/index.html') {
         STATE.route = 'start';
+        $('div #snap-to-results').removeClass('.toggle-margin');
         change = true;
     } else if(document.location.pathname === `/shelter-list/${STATE.queryShelterAnimals.id}`) {
         STATE.route = 'shelter-animals';
@@ -68,6 +69,11 @@ function renderProjectPaws(currentRoute, elements) {
         elements[route].hide();
     });
     elements[currentRoute].show();
+    if (currentRoute === 'start') {
+        $('div.results-area').removeClass('toggle-margin');
+    } else if (!($('div.results-area').hasClass('toggle-margin'))) {
+        $('div.results-area').addClass('toggle-margin');
+    }
 }
  
 // GOOGLE MAPS AUTOCOMPLETE 

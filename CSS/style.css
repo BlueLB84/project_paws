@@ -26,9 +26,9 @@ h1 {
 
 .topHome {
     background-image: url("../images/background.jpg");
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-color: #373F51;
     padding: 10px;
     margin-bottom: -70px;
@@ -46,7 +46,7 @@ main {
     margin-right: auto;
     margin-left: auto;
     padding-bottom: 30px;
-    color: #6FF2E7;
+    color: #66E3FF;
 }
 
 main h2 {
@@ -187,8 +187,6 @@ footer a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 90px;
-    margin-bottom: 80px;
     width: 100%;
 }
 
@@ -306,6 +304,11 @@ footer a {
       color: #1F615A;
 }
 
+.toggle-margin {
+    margin-top: 90px;
+    margin-bottom: 80px;
+}
+
 @media screen and (min-width: 679px) {
     button:hover {
         cursor: pointer;
@@ -317,7 +320,7 @@ footer a {
 @media screen and (max-width: 678px) {
     .topHome {
         background-image: url("../images/chief.jpg");
-        background-size: 100%;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: top;
         padding: 10px;
