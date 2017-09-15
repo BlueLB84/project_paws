@@ -186,6 +186,7 @@ footer a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 90px;
     margin-bottom: 80px;
     width: 100%;
 }
